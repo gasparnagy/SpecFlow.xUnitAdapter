@@ -1,0 +1,1 @@
+﻿#error (1:1): expected: #EOF, #Language, #TagLine, #FeatureLine, #Comment, #Empty, got 'Funktionalität: SpecFlowFeature2'
