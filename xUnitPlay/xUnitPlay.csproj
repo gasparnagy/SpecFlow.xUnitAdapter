@@ -56,10 +56,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
-    <Compile Include="Disc.cs" />
+    <Compile Include="FeatureFileTypeInfo.cs" />
+    <Compile Include="SpecFlowTestDiscoverer.cs" />
+    <Compile Include="SpecFlowTestFramework.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="tcc.cs" />
+    <Compile Include="ScenarioTestCase.cs" />
+    <Compile Include="SpecFlowProjectAssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

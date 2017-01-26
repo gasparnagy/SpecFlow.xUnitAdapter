@@ -76,6 +76,12 @@
       <LastGenOutput>SpecFlowFeature1.feature.cs</LastGenOutput>
     </None>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\xUnitPlay\xUnitPlay.csproj">
+      <Project>{1dd1877b-e008-4383-ae65-69a55264c5ba}</Project>
+      <Name>xUnitPlay</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
