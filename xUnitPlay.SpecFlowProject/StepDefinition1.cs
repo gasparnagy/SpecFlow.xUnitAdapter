@@ -9,6 +9,12 @@ namespace xUnitPlay.SpecFlowProject
     [Binding]
     public sealed class StepDefinition1
     {
+        [Given(@"there is a background")]
+        public void GivenThereIsABackground()
+        {
+            Console.WriteLine("Running Background step");
+        }
+
         [Given("I have entered (.*) into the calculator")]
         public void GivenIHaveEnteredSomethingIntoTheCalculator(int number)
         {

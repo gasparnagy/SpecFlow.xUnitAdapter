@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
@@ -126,7 +127,13 @@ namespace xUnitPlay.Runners
             var scenarioInfo = new ScenarioInfo(scenario.Name, scenario.Tags.GetTags().ToArray());
             ScenarioSetup(scenarioInfo);
 
-            foreach (var step in scenario.Steps.Cast<SpecFlowStep>())
+            IEnumerable<SpecFlowStep> steps = scenario.Steps.Cast<SpecFlowStep>();
+            if (gherkinDocument.SpecFlowFeature.Background != null)
+            {
+                steps = gherkinDocument.SpecFlowFeature.Background.Steps.Cast<SpecFlowStep>().Concat(steps);
+            }
+
+            foreach (var step in steps)
             {
                 output.AppendLine($"> Running {step.Keyword}{step.Text}");
                 ExecuteStep(step);

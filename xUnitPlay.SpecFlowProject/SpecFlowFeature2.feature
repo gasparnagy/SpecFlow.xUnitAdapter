@@ -3,6 +3,9 @@
 	As a math idiot
 	I want to be told the sum of two numbers
 
+Background: 
+	Given there is a background
+
 @mytag
 Scenario: Add two numbers C
 	Given I have entered 50 into the calculator
@@ -20,3 +23,4 @@ Examples:
 	| a | b | result |
 	| 1 | 2 | 3      |
 	| 3 | 4 | 7      |
+	| 3 | 4 | 42     |
