@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Reflection;
-using xUnitPlay.Artifacts;
 using xUnitPlay.Framework;
+using xUnitPlay.TestArtifacts;
 using Xunit.Abstractions;
 using Xunit.Sdk;
 

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using Gherkin.Ast;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Parser;
-using xUnitPlay.Artifacts;
+using xUnitPlay.TestArtifacts;
 using Xunit.Sdk;
 
 namespace xUnitPlay.Runners
@@ -27,7 +27,7 @@ namespace xUnitPlay.Runners
             Debug.Assert(gherkinDocument.Feature != null);
             var feature = gherkinDocument.Feature;
 
-            var assembly = Assembly.LoadFrom(TestCase.FeatureFile.Assembly.AssemblyPath);
+            var assembly = Assembly.LoadFrom(TestCase.FeatureFile.SpecFlowProject.AssemblyPath);
             testRunner = TestRunnerManager.GetTestRunner(assembly);
             var featureInfo = new FeatureInfo(new CultureInfo("en-US"), feature.Name, feature.Description, ProgrammingLanguage.CSharp, feature.Tags.GetTags().ToArray());
             testRunner.OnFeatureStart(featureInfo);

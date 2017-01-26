@@ -34,7 +34,7 @@ namespace xUnitPlay.SpecFlowProject
         public static void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "SpecFlowFeature1", "\tIn order to avoid silly mistakes\r\n\tAs a math idiot\r\n\tI want to be told the sum o" +
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "SpecFlow Feature 1", "\tIn order to avoid silly mistakes\r\n\tAs a math idiot\r\n\tI want to be told the sum o" +
                     "f two numbers", ProgrammingLanguage.CSharp, new string[] {
                         "featuretag"});
             testRunner.OnFeatureStart(featureInfo);
@@ -75,7 +75,7 @@ namespace xUnitPlay.SpecFlowProject
         }
         
         [Xunit.FactAttribute(DisplayName="Add two numbers")]
-        [Xunit.TraitAttribute("FeatureTitle", "SpecFlowFeature1")]
+        [Xunit.TraitAttribute("FeatureTitle", "SpecFlow Feature 1")]
         [Xunit.TraitAttribute("Description", "Add two numbers")]
         [Xunit.TraitAttribute("Category", "mytag")]
         public virtual void AddTwoNumbers()
@@ -97,7 +97,7 @@ this.ScenarioSetup(scenarioInfo);
         }
         
         [Xunit.FactAttribute(DisplayName="Multiply two numbers")]
-        [Xunit.TraitAttribute("FeatureTitle", "SpecFlowFeature1")]
+        [Xunit.TraitAttribute("FeatureTitle", "SpecFlow Feature 1")]
         [Xunit.TraitAttribute("Description", "Multiply two numbers")]
         [Xunit.TraitAttribute("Category", "mytag")]
         [Xunit.TraitAttribute("Category", "othertag")]

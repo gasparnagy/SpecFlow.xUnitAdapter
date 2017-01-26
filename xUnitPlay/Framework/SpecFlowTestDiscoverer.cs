@@ -1,6 +1,8 @@
 ﻿using System.Linq;
+using System.Threading.Tasks;
 using Gherkin.Ast;
-using xUnitPlay.Artifacts;
+using TechTalk.SpecFlow.Parser;
+using xUnitPlay.TestArtifacts;
 using Xunit.Abstractions;
 using Xunit.Sdk;
 
@@ -13,22 +15,23 @@ namespace xUnitPlay.Framework
         {
         }
 
-        protected override ITestClass CreateTestClass(ITypeInfo @class)
+        protected override ITestClass CreateTestClass(ITypeInfo typeInfo)
         {
-            return (ITestClass)@class;
+            return (ITestClass)typeInfo;
         }
 
         protected override bool FindTestsForType(ITestClass testClass, bool includeSourceInformation, IMessageBus messageBus,
             ITestFrameworkDiscoveryOptions discoveryOptions)
         {
-            var featureFileTypeInfo = (FeatureFileTypeInfo)testClass;
-            var gherkinDocument = SpecFlowParserHelper.ParseSpecFlowDocument(featureFileTypeInfo.FeatureFilePath).Result;
+            var featureFileTestClass = (FeatureFileTestClass)testClass;
+            var gherkinDocument = SpecFlowParserHelper.ParseSpecFlowDocument(featureFileTestClass.FeatureFilePath).Result;
             if (gherkinDocument.SpecFlowFeature != null)
             {
+                featureFileTestClass.FeatureName = gherkinDocument.SpecFlowFeature.Name;
                 var featureTags = gherkinDocument.SpecFlowFeature.Tags.GetTags().ToArray();
                 foreach (var scenario in gherkinDocument.SpecFlowFeature.ScenarioDefinitions.OfType<Scenario>())
                 {
-                    var scenarioTestCase = new ScenarioTestCase(featureFileTypeInfo, scenario, featureTags);
+                    var scenarioTestCase = new ScenarioTestCase(featureFileTestClass, scenario, featureTags);
                     if (!messageBus.QueueMessage(new TestCaseDiscoveryMessage(scenarioTestCase)))
                         return false;
                 }
