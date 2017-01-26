@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Gherkin.Ast;
 using TechTalk.SpecFlow.Parser;
@@ -24,7 +25,7 @@ namespace xUnitPlay.Framework
             ITestFrameworkDiscoveryOptions discoveryOptions)
         {
             var featureFileTestClass = (FeatureFileTestClass)testClass;
-            var gherkinDocument = SpecFlowParserHelper.ParseSpecFlowDocument(featureFileTestClass.FeatureFilePath).Result;
+            var gherkinDocument = SpecFlowParserHelper.ParseSpecFlowDocument(featureFileTestClass.FeatureFilePath);
             if (gherkinDocument.SpecFlowFeature != null)
             {
                 featureFileTestClass.FeatureName = gherkinDocument.SpecFlowFeature.Name;

@@ -61,7 +61,7 @@ namespace xUnitPlay.Runners
             var summary = new RunSummary() { Total = 1 };
             var output = new StringBuilder();
 
-            var gherkinDocument = await SpecFlowParserHelper.ParseSpecFlowDocument(TestCase.FeatureFile.FeatureFilePath);
+            var gherkinDocument = await SpecFlowParserHelper.ParseSpecFlowDocumentAsync(TestCase.FeatureFile.FeatureFilePath);
 
             Scenario scenario = null;
             if (gherkinDocument.SpecFlowFeature != null)

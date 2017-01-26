@@ -12,12 +12,22 @@ namespace xUnitPlay
 {
     public static class SpecFlowParserHelper
     {
-        public static async Task<SpecFlowDocument> ParseSpecFlowDocument(string featureFilePath)
+        public static async Task<SpecFlowDocument> ParseSpecFlowDocumentAsync(string featureFilePath)
         {
             var fileContent = await ReadAllTextAsync(featureFilePath);
             var parser = new SpecFlowGherkinParser(new CultureInfo("en-US"));
             var gherkinDocument = parser.Parse(new StringReader(fileContent), featureFilePath);
             return gherkinDocument;
+        }
+
+        public static SpecFlowDocument ParseSpecFlowDocument(string featureFilePath)
+        {
+            using (var reader = new StreamReader(featureFilePath))
+            {
+                var parser = new SpecFlowGherkinParser(new CultureInfo("en-US"));
+                var gherkinDocument = parser.Parse(reader, featureFilePath);
+                return gherkinDocument;
+            }
         }
 
         private static async Task<string> ReadAllTextAsync(string filePath)
