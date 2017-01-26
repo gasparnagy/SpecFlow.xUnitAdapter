@@ -17,7 +17,6 @@ namespace xUnitPlay.TestArtifacts
         public string Name { get; private set; }
 
         public string DisplayName => GetDisplayName();
-
         public string UniqueID => $"{FeatureFile.RelativePath};{Name};{ExampleId}";
 
         public ISourceInformation SourceInformation { get; set; }
@@ -25,6 +24,8 @@ namespace xUnitPlay.TestArtifacts
         public Dictionary<string, List<string>> Traits { get; set; }
         public Dictionary<string,string> ScenarioOutlineParameters { get; set; }
         public string ExampleId { get; set; }
+
+        public bool IsScenarioOutline => !string.IsNullOrEmpty(ExampleId);
 
         object[] ITestCase.TestMethodArguments => ScenarioOutlineParameters?.Cast<object>().ToArray();
         public ITestClass TestClass => FeatureFile;
@@ -70,12 +71,14 @@ namespace xUnitPlay.TestArtifacts
         {
             FeatureFile = data.GetValue<FeatureFileTestClass>("FeatureFile");
             Name = data.GetValue<string>("Name");
+            ExampleId = data.GetValue<string>("ExampleId");
         }
 
         public void Serialize(IXunitSerializationInfo data)
         {
             data.AddValue("FeatureFile", FeatureFile);
             data.AddValue("Name", Name);
+            data.AddValue("ExampleId", ExampleId);
         }
 
         public virtual Task<RunSummary> RunAsync(IMessageSink diagnosticMessageSink,

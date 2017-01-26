@@ -30,6 +30,8 @@ namespace xUnitPlay.SpecFlowProject
         [Then("the result should be (.*) on the screen")]
         public void ThenTheResultShouldBe(int result)
         {
+            if (result == 42)
+                throw new Exception("wrong result");
             Console.WriteLine("Running Then step");
         }
     }

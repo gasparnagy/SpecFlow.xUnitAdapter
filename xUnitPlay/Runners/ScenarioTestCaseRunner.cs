@@ -66,7 +66,20 @@ namespace xUnitPlay.Runners
             Scenario scenario = null;
             if (gherkinDocument.SpecFlowFeature != null)
             {
-                scenario = gherkinDocument.SpecFlowFeature.ScenarioDefinitions.OfType<Scenario>().FirstOrDefault(s => s.Name == TestCase.Name);
+                if (TestCase.IsScenarioOutline)
+                {
+                    var scenarioOutline = gherkinDocument.SpecFlowFeature.ScenarioDefinitions.OfType<ScenarioOutline>().FirstOrDefault(s => s.Name == TestCase.Name);
+                    Examples example = null;
+                    Gherkin.Ast.TableRow exampleRow = null;
+                    if (scenarioOutline != null && SpecFlowParserHelper.GetExampleRowById(scenarioOutline, TestCase.ExampleId, out example, out exampleRow))
+                    {
+                        scenario = SpecFlowParserHelper.CreateScenario(scenarioOutline, example, exampleRow);
+                    }
+                }
+                else
+                {
+                    scenario = gherkinDocument.SpecFlowFeature.ScenarioDefinitions.OfType<Scenario>().FirstOrDefault(s => s.Name == TestCase.Name);
+                }
             }
 
             var skipped = scenario == null;
