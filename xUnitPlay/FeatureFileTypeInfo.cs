@@ -19,17 +19,17 @@ namespace xUnitPlay
 
         public IEnumerable<ITypeInfo> GetGenericArguments()
         {
-            throw new NotImplementedException();
+            throw new NotImplementedException("FeatureFileTypeInfo.GetGenericArguments");
         }
 
         public IMethodInfo GetMethod(string methodName, bool includePrivateMethod)
         {
-            throw new NotImplementedException();
+            throw new NotImplementedException("FeatureFileTypeInfo.GetMethod");
         }
 
         public IEnumerable<IMethodInfo> GetMethods(bool includePrivateMethods)
         {
-            throw new NotImplementedException();
+            throw new NotImplementedException("FeatureFileTypeInfo.GetMethods");
         }
 
         public IAssemblyInfo Assembly { get; set; }
@@ -52,12 +52,12 @@ namespace xUnitPlay
 
         public void Deserialize(IXunitSerializationInfo info)
         {
-            throw new NotImplementedException();
+            throw new NotImplementedException("FeatureFileTypeInfo.Deserialize");
         }
 
         public void Serialize(IXunitSerializationInfo info)
         {
-            throw new NotImplementedException();
+            throw new NotImplementedException("FeatureFileTypeInfo.Serialize");
         }
 
         public ITypeInfo Class { get { return this; } }

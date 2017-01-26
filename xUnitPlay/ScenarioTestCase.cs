@@ -16,12 +16,12 @@ namespace xUnitPlay
 
         public void Deserialize(IXunitSerializationInfo info)
         {
-            throw new NotImplementedException();
+            throw new NotImplementedException("ScenarioTestCase.Deserialize");
         }
 
         public void Serialize(IXunitSerializationInfo info)
         {
-            throw new NotImplementedException();
+            throw new NotImplementedException("ScenarioTestCase.Serialize");
         }
 
         public string DisplayName { get; set; }
@@ -52,22 +52,22 @@ namespace xUnitPlay
         public ITestClass TestClass { get; set; }
         public IEnumerable<IAttributeInfo> GetCustomAttributes(string assemblyQualifiedAttributeTypeName)
         {
-            throw new NotImplementedException("GetCustomAttributes");
+            throw new NotImplementedException("GetCustomAttributes.GetCustomAttributes");
         }
 
         public IEnumerable<ITypeInfo> GetGenericArguments()
         {
-            throw new NotImplementedException();
+            throw new NotImplementedException("ScenarioTestCase.GetGenericArguments");
         }
 
         public IEnumerable<IParameterInfo> GetParameters()
         {
-            throw new NotImplementedException();
+            throw new NotImplementedException("ScenarioTestCase.GetParameters");
         }
 
         public IMethodInfo MakeGenericMethod(params ITypeInfo[] typeArguments)
         {
-            throw new NotImplementedException();
+            throw new NotImplementedException("ScenarioTestCase.MakeGenericMethod");
         }
 
         public bool IsAbstract { get; set; }
@@ -77,6 +77,6 @@ namespace xUnitPlay
         public string Name { get; set; }
         public ITypeInfo ReturnType { get; set; }
         public ITypeInfo Type { get { return TestClass.Class; } }
-        public MethodInfo MethodInfo { get { throw new NotImplementedException("MethodInfo");} }
+        public MethodInfo MethodInfo { get { throw new NotImplementedException("ScenarioTestCase.MethodInfo");} }
     }
 }
