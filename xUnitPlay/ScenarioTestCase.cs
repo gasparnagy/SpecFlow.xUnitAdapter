@@ -14,30 +14,35 @@ namespace xUnitPlay
     {
         public FeatureFileTypeInfo FeatureFile => (FeatureFileTypeInfo)TestClass;
 
-        public void Deserialize(IXunitSerializationInfo info)
+        public void Deserialize(IXunitSerializationInfo data)
         {
-            throw new NotImplementedException("ScenarioTestCase.Deserialize");
+            TestClass = data.GetValue<FeatureFileTypeInfo>("TestClass");
+            Name = data.GetValue<string>("Name");
         }
 
-        public void Serialize(IXunitSerializationInfo info)
+        public void Serialize(IXunitSerializationInfo data)
         {
-            throw new NotImplementedException("ScenarioTestCase.Serialize");
+            data.AddValue("TestClass", TestClass);
+            data.AddValue("Name", Name);
         }
 
-        public string DisplayName { get; set; }
+        public string DisplayName => Name;
         public string SkipReason { get; set; }
         public ISourceInformation SourceInformation { get; set; }
         public ITestMethod TestMethod { get { return this; } }
         public object[] TestMethodArguments { get; set; }
         public Dictionary<string, List<string>> Traits { get; set; }
-        public string UniqueID { get; set; }
+        public string UniqueID => $"{FeatureFile.Name};{Name}";
+
+        public ScenarioTestCase()
+        {
+            
+        }
 
         public ScenarioTestCase(FeatureFileTypeInfo featureFileTypeInfo, string scenarioTitle)
         {
             TestClass = featureFileTypeInfo;
             Name = scenarioTitle;
-            DisplayName = scenarioTitle;
-            UniqueID = $"{featureFileTypeInfo.Name};{scenarioTitle}";
         }
 
         /// <inheritdoc/>

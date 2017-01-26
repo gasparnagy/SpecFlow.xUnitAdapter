@@ -42,6 +42,10 @@ namespace xUnitPlay
         public bool IsValueType { get; set; }
         public string Name { get; set; }
 
+        public FeatureFileTypeInfo()
+        {
+        }
+
         public FeatureFileTypeInfo(string name, IAssemblyInfo assembly)
         {
             Name = name;
@@ -50,14 +54,18 @@ namespace xUnitPlay
             TestCollection = new TestCollection(new TestAssembly(assembly, null), null, "My Collectin");
         }
 
-        public void Deserialize(IXunitSerializationInfo info)
+        public void Deserialize(IXunitSerializationInfo data)
         {
-            throw new NotImplementedException("FeatureFileTypeInfo.Deserialize");
+            Assembly = data.GetValue<IAssemblyInfo>("Assembly");
+            Name = data.GetValue<string>("Name");
+            TestCollection = data.GetValue<ITestCollection>("TestCollection");
         }
 
-        public void Serialize(IXunitSerializationInfo info)
+        public void Serialize(IXunitSerializationInfo data)
         {
-            throw new NotImplementedException("FeatureFileTypeInfo.Serialize");
+            data.AddValue("Assembly", Assembly);
+            data.AddValue("Name", Name);
+            data.AddValue("TestCollection", TestCollection);
         }
 
         public ITypeInfo Class { get { return this; } }

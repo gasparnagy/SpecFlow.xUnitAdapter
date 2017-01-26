@@ -6,20 +6,25 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Xunit.Abstractions;
+using Xunit.Sdk;
 
 namespace xUnitPlay
 {
     [Serializable]
-    public class SpecFlowProjectAssemblyInfo : IAssemblyInfo
+    public class SpecFlowProjectAssemblyInfo : IAssemblyInfo, IXunitSerializable
     {
-        public string FeatureFilesFolder { get; private set; }
+        public string FeatureFilesFolder => Path.GetFullPath(Path.GetDirectoryName(originalAssemblyInfo.AssemblyPath));
 
-        private readonly IAssemblyInfo originalAssemblyInfo;
+        private IAssemblyInfo originalAssemblyInfo;
+
+        public SpecFlowProjectAssemblyInfo()
+        {
+            
+        }
 
         public SpecFlowProjectAssemblyInfo(IAssemblyInfo originalAssemblyInfo)
         {
             this.originalAssemblyInfo = originalAssemblyInfo;
-            FeatureFilesFolder = Path.GetFullPath(Path.GetDirectoryName(originalAssemblyInfo.AssemblyPath));
         }
 
         public IEnumerable<IAttributeInfo> GetCustomAttributes(string assemblyQualifiedAttributeTypeName)
@@ -51,6 +56,22 @@ namespace xUnitPlay
         public string Name
         {
             get { return originalAssemblyInfo.Name; }
+        }
+
+        public void Deserialize(IXunitSerializationInfo data)
+        {
+            string assemblyName = data.GetValue<string>("OrigAssembly");
+            originalAssemblyInfo = Reflector.Wrap(Assembly.LoadFrom(assemblyName));
+
+            //var an = new AssemblyName(assemblyName);
+            //var assembly = Assembly.Load(new AssemblyName { Name = an.Name, Version = an.Version });
+            //originalAssemblyInfo = Reflector.Wrap(assembly);
+
+        }
+
+        public void Serialize(IXunitSerializationInfo data)
+        {
+            data.AddValue("OrigAssembly", AssemblyPath);
         }
     }
 }
