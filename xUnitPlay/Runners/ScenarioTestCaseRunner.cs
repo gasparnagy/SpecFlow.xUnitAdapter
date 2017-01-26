@@ -83,12 +83,19 @@ namespace xUnitPlay.Runners
                 }
             }
 
-            var skipped = scenario == null;
-            if (skipped)
+            string skipReason = null;
+            if (scenario == null)
+                skipReason = $"Unable to find Scenario: {TestCase.DisplayName}";
+            else if (gherkinDocument.SpecFlowFeature.Tags.GetTags().Concat(scenario.Tags.GetTags()).Contains("ignore"))
+            {
+                skipReason = "Ignored";
+            }
+
+            if (skipReason != null)
             {
                 summary.Skipped++;
 
-                if (!MessageBus.QueueMessage(new TestSkipped(test, $"Unable to find Scenario: {TestCase.DisplayName}")))
+                if (!MessageBus.QueueMessage(new TestSkipped(test, skipReason)))
                     CancellationTokenSource.Cancel();
             }
             else
