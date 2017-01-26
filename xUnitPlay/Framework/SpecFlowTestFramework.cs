@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using xUnitPlay.Framework;
 using Xunit.Abstractions;
 using Xunit.Sdk;
 

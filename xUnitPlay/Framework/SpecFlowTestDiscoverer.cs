@@ -1,9 +1,10 @@
 ﻿using System.Linq;
 using Gherkin.Ast;
+using xUnitPlay.Artifacts;
 using Xunit.Abstractions;
 using Xunit.Sdk;
 
-namespace xUnitPlay
+namespace xUnitPlay.Framework
 {
     public class SpecFlowTestDiscoverer : TestFrameworkDiscoverer
     {

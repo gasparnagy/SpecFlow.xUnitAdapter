@@ -76,19 +76,19 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FeatureFileTypeInfo.cs" />
-    <Compile Include="ScenarioTestCaseRunner.cs" />
-    <Compile Include="SpecFlowFeatureRunner.cs" />
-    <Compile Include="SpecFlowGenericFixtureType.cs" />
+    <Compile Include="Artifacts\FeatureFileTypeInfo.cs" />
+    <Compile Include="Runners\ScenarioTestCaseRunner.cs" />
+    <Compile Include="Obsolete\SpecFlowFeatureRunner.cs" />
+    <Compile Include="Artifacts\SpecFlowGenericFixtureType.cs" />
     <Compile Include="SpecFlowParserHelper.cs" />
-    <Compile Include="SpecFlowTestAssemblyRunner.cs" />
-    <Compile Include="SpecFlowTestCollectionRunner.cs" />
-    <Compile Include="SpecFlowTestDiscoverer.cs" />
-    <Compile Include="SpecFlowTestFramework.cs" />
+    <Compile Include="Obsolete\SpecFlowTestAssemblyRunner.cs" />
+    <Compile Include="Obsolete\SpecFlowTestCollectionRunner.cs" />
+    <Compile Include="Framework\SpecFlowTestDiscoverer.cs" />
+    <Compile Include="Framework\SpecFlowTestFramework.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ScenarioTestCase.cs" />
-    <Compile Include="SpecFlowProjectAssemblyInfo.cs" />
-    <Compile Include="SpecFlowTestFrameworkExecutor.cs" />
+    <Compile Include="Artifacts\ScenarioTestCase.cs" />
+    <Compile Include="Artifacts\SpecFlowProjectAssemblyInfo.cs" />
+    <Compile Include="Obsolete\SpecFlowTestFrameworkExecutor.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -1,21 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
-using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Gherkin.Ast;
-using Microsoft.SqlServer.Server;
 using TechTalk.SpecFlow;
-using TechTalk.SpecFlow.Assist.ValueRetrievers;
 using TechTalk.SpecFlow.Parser;
+using xUnitPlay.Artifacts;
 using Xunit.Sdk;
 
-namespace xUnitPlay
+namespace xUnitPlay.Runners
 {
     public class ScenarioTestCaseRunner : TestCaseRunner<ScenarioTestCase>
     {
