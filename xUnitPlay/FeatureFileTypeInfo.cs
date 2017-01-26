@@ -6,11 +6,11 @@ using Xunit.Sdk;
 namespace xUnitPlay
 {
     [Serializable]
-    public class FeatureFileTypeInfo : ITypeInfo, ITestClass
+    public class FeatureFileTypeInfo : ITypeInfo, ITestClass, IReflectionTypeInfo
     {
         public IEnumerable<IAttributeInfo> GetCustomAttributes(string assemblyQualifiedAttributeTypeName)
         {
-            throw new NotImplementedException();
+            yield break;
         }
 
         public IEnumerable<ITypeInfo> GetGenericArguments()
@@ -58,5 +58,6 @@ namespace xUnitPlay
 
         public ITypeInfo Class { get { return this; } }
         public ITestCollection TestCollection { get; set; }
+        public Type Type => typeof (SpecFlowGenericFixtureType);
     }
 }

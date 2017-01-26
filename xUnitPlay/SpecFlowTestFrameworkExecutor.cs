@@ -9,6 +9,7 @@ namespace xUnitPlay
     {
         public SpecFlowTestFrameworkExecutor(AssemblyName assemblyName, ISourceInformationProvider sourceInformationProvider, IMessageSink diagnosticMessageSink) : base(assemblyName, sourceInformationProvider, diagnosticMessageSink)
         {
+            TestAssembly = new TestAssembly(AssemblyInfo, null, assemblyName.Version);
         }
 
         protected override ITestFrameworkDiscoverer CreateDiscoverer()
@@ -16,10 +17,13 @@ namespace xUnitPlay
             return new SpecFlowTestDiscoverer(AssemblyInfo, SourceInformationProvider, DiagnosticMessageSink);
         }
 
-        protected override void RunTestCases(IEnumerable<ScenarioTestCase> testCases, IMessageSink executionMessageSink,
+        protected TestAssembly TestAssembly { get; set; }
+
+        protected override async void RunTestCases(IEnumerable<ScenarioTestCase> testCases, IMessageSink executionMessageSink,
             ITestFrameworkExecutionOptions executionOptions)
         {
-            throw new System.NotImplementedException("RunTestCases");
+            using (var assemblyRunner = new SpecFlowTestAssemblyRunner(TestAssembly, testCases, DiagnosticMessageSink, executionMessageSink, executionOptions))
+                await assemblyRunner.RunAsync();
         }
     }
 }

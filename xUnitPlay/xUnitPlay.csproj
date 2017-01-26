@@ -57,6 +57,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FeatureFileTypeInfo.cs" />
+    <Compile Include="ScenarioTestCaseRunner.cs" />
+    <Compile Include="SpecFlowFeatureRunner.cs" />
+    <Compile Include="SpecFlowGenericFixtureType.cs" />
+    <Compile Include="SpecFlowTestAssemblyRunner.cs" />
+    <Compile Include="SpecFlowTestCollectionRunner.cs" />
     <Compile Include="SpecFlowTestDiscoverer.cs" />
     <Compile Include="SpecFlowTestFramework.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

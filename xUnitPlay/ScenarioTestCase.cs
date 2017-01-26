@@ -1,11 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
+using System.Threading;
+using System.Threading.Tasks;
 using Xunit.Abstractions;
+using Xunit.Sdk;
 
 namespace xUnitPlay
 {
     [Serializable]
-    public class ScenarioTestCase : ITestCase, ITestMethod, IMethodInfo
+    public class ScenarioTestCase : ITestCase, ITestMethod, IMethodInfo, IXunitTestCase, IReflectionMethodInfo
     {
         public void Deserialize(IXunitSerializationInfo info)
         {
@@ -32,11 +36,19 @@ namespace xUnitPlay
             UniqueID = DisplayName;
         }
 
+        /// <inheritdoc/>
+        public virtual Task<RunSummary> RunAsync(IMessageSink diagnosticMessageSink,
+                                                 IMessageBus messageBus,
+                                                 object[] constructorArguments,
+                                                 ExceptionAggregator aggregator,
+                                                 CancellationTokenSource cancellationTokenSource)
+            => new ScenarioTestCaseRunner(this, messageBus, aggregator, cancellationTokenSource).RunAsync();
+
         public IMethodInfo Method { get { return this; } }
         public ITestClass TestClass { get; set; }
         public IEnumerable<IAttributeInfo> GetCustomAttributes(string assemblyQualifiedAttributeTypeName)
         {
-            throw new NotImplementedException();
+            throw new NotImplementedException("GetCustomAttributes");
         }
 
         public IEnumerable<ITypeInfo> GetGenericArguments()
@@ -61,5 +73,6 @@ namespace xUnitPlay
         public string Name { get { return UniqueID; } }
         public ITypeInfo ReturnType { get; set; }
         public ITypeInfo Type { get { return TestClass.Class; } }
+        public MethodInfo MethodInfo { get { throw new NotImplementedException("MethodInfo");} }
     }
 }

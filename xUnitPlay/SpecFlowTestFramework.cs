@@ -15,9 +15,9 @@ namespace xUnitPlay
             return new SpecFlowTestDiscoverer(assemblyInfo, SourceInformationProvider, DiagnosticMessageSink);
         }
 
-        protected override ITestFrameworkExecutor CreateExecutor(AssemblyName assemblyName)
-        {
-            return new SpecFlowTestFrameworkExecutor(assemblyName, SourceInformationProvider, DiagnosticMessageSink);
-        }
+        //protected override ITestFrameworkExecutor CreateExecutor(AssemblyName assemblyName)
+        //{
+        //    return new SpecFlowTestFrameworkExecutor(assemblyName, SourceInformationProvider, DiagnosticMessageSink);
+        //}
     }
 }
