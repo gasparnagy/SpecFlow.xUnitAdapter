@@ -32,7 +32,7 @@ namespace xUnitPlay
 
             var assembly = Assembly.LoadFrom(TestCase.FeatureFile.Assembly.AssemblyPath);
             testRunner = TestRunnerManager.GetTestRunner(assembly);
-            var featureInfo = new FeatureInfo(new CultureInfo("en-US"), feature.Name, feature.Description, ProgrammingLanguage.CSharp, feature.Tags.Select(t => t.Name).ToArray());
+            var featureInfo = new FeatureInfo(new CultureInfo("en-US"), feature.Name, feature.Description, ProgrammingLanguage.CSharp, feature.Tags.GetTags().ToArray());
             testRunner.OnFeatureStart(featureInfo);
         }
 
@@ -113,7 +113,7 @@ namespace xUnitPlay
         {
             FeatureSetup(gherkinDocument);
 
-            var scenarioInfo = new ScenarioInfo(scenario.Name, scenario.Tags.Select(t => t.Name).ToArray());
+            var scenarioInfo = new ScenarioInfo(scenario.Name, scenario.Tags.GetTags().ToArray());
             ScenarioSetup(scenarioInfo);
 
             foreach (var step in scenario.Steps.Cast<SpecFlowStep>())

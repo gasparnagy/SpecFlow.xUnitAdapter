@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
+using Gherkin.Ast;
 using Xunit.Abstractions;
 using Xunit.Sdk;
 
@@ -12,7 +14,14 @@ namespace xUnitPlay
     [Serializable]
     public class ScenarioTestCase : LongLivedMarshalByRefObject, ITestCase, ITestMethod, IMethodInfo, IXunitTestCase, IReflectionMethodInfo
     {
+        public ITestClass TestClass { get; set; }
+        public string Name { get; set; }
+
         public FeatureFileTypeInfo FeatureFile => (FeatureFileTypeInfo)TestClass;
+        public string DisplayName => Name;
+        public string UniqueID => $"{FeatureFile.Name};{Name}";
+
+        public ITestMethod TestMethod => this;
 
         public void Deserialize(IXunitSerializationInfo data)
         {
@@ -26,23 +35,30 @@ namespace xUnitPlay
             data.AddValue("Name", Name);
         }
 
-        public string DisplayName => Name;
         public string SkipReason { get; set; }
         public ISourceInformation SourceInformation { get; set; }
-        public ITestMethod TestMethod { get { return this; } }
         public object[] TestMethodArguments { get; set; }
         public Dictionary<string, List<string>> Traits { get; set; }
-        public string UniqueID => $"{FeatureFile.Name};{Name}";
+
+        public bool IsAbstract { get; set; }
+        public bool IsGenericMethodDefinition { get; set; }
+        public bool IsPublic { get { return true; } }
+        public bool IsStatic { get; set; }
+        public ITypeInfo ReturnType { get; set; }
+        public MethodInfo MethodInfo { get { throw new NotImplementedException("ScenarioTestCase.MethodInfo"); } }
+        public ITypeInfo Type => TestClass.Class;
 
         public ScenarioTestCase()
         {
-            
+            Traits = new Dictionary<string, List<string>>();
         }
 
-        public ScenarioTestCase(FeatureFileTypeInfo featureFileTypeInfo, string scenarioTitle)
+        public ScenarioTestCase(FeatureFileTypeInfo featureFileTypeInfo, Scenario scenario, string[] featureTags) : this()
         {
             TestClass = featureFileTypeInfo;
-            Name = scenarioTitle;
+            Name = scenario.Name;
+            SourceInformation = new SourceInformation { FileName = featureFileTypeInfo.FeatureFilePath, LineNumber = scenario.Location?.Line };
+            Traits.Add("Category", featureTags.Concat(scenario.Tags.GetTags()).ToList());
         }
 
         /// <inheritdoc/>
@@ -54,7 +70,6 @@ namespace xUnitPlay
             => new ScenarioTestCaseRunner(this, messageBus, aggregator, cancellationTokenSource).RunAsync();
 
         public IMethodInfo Method { get { return this; } }
-        public ITestClass TestClass { get; set; }
         public IEnumerable<IAttributeInfo> GetCustomAttributes(string assemblyQualifiedAttributeTypeName)
         {
             throw new NotImplementedException("GetCustomAttributes.GetCustomAttributes");
@@ -75,13 +90,5 @@ namespace xUnitPlay
             throw new NotImplementedException("ScenarioTestCase.MakeGenericMethod");
         }
 
-        public bool IsAbstract { get; set; }
-        public bool IsGenericMethodDefinition { get; set; }
-        public bool IsPublic { get { return true; } }
-        public bool IsStatic { get; set; }
-        public string Name { get; set; }
-        public ITypeInfo ReturnType { get; set; }
-        public ITypeInfo Type { get { return TestClass.Class; } }
-        public MethodInfo MethodInfo { get { throw new NotImplementedException("ScenarioTestCase.MethodInfo");} }
     }
 }

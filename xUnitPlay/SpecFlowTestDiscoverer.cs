@@ -24,9 +24,11 @@ namespace xUnitPlay
             var gherkinDocument = SpecFlowParserHelper.ParseSpecFlowDocument(featureFileTypeInfo.FeatureFilePath).Result;
             if (gherkinDocument.SpecFlowFeature != null)
             {
+                var featureTags = gherkinDocument.SpecFlowFeature.Tags.GetTags().ToArray();
                 foreach (var scenario in gherkinDocument.SpecFlowFeature.ScenarioDefinitions.OfType<Scenario>())
                 {
-                    if (!messageBus.QueueMessage(new TestCaseDiscoveryMessage(new ScenarioTestCase(featureFileTypeInfo, scenario.Name))))
+                    var scenarioTestCase = new ScenarioTestCase(featureFileTypeInfo, scenario, featureTags);
+                    if (!messageBus.QueueMessage(new TestCaseDiscoveryMessage(scenarioTestCase)))
                         return false;
                 }
             }

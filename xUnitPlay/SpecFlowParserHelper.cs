@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Gherkin.Ast;
 using TechTalk.SpecFlow.Parser;
 
 namespace xUnitPlay
@@ -24,6 +25,16 @@ namespace xUnitPlay
             using (var reader = File.OpenText(filePath))
             {
                 return await reader.ReadToEndAsync();
+            }
+        }
+
+        public static IEnumerable<string> GetTags(this IEnumerable<Tag> tagList)
+        {
+            if (tagList == null)
+                yield break;
+            foreach (var tag in tagList)
+            {
+                yield return tag.Name.TrimStart('@');
             }
         }
     }
