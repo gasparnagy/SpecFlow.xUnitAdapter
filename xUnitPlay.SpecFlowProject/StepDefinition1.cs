@@ -21,6 +21,12 @@ namespace xUnitPlay.SpecFlowProject
             Console.WriteLine("Running When step");
         }
 
+        [When(@"I press multiply")]
+        public void WhenIPressMultiply()
+        {
+            throw new Exception("this has failed");
+        }
+
         [Then("the result should be (.*) on the screen")]
         public void ThenTheResultShouldBe(int result)
         {
