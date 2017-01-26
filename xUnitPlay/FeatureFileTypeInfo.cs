@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using Xunit.Abstractions;
 using Xunit.Sdk;
 
@@ -8,6 +9,9 @@ namespace xUnitPlay
     [Serializable]
     public class FeatureFileTypeInfo : ITypeInfo, ITestClass, IReflectionTypeInfo
     {
+        public SpecFlowProjectAssemblyInfo SpecFlowProject => (SpecFlowProjectAssemblyInfo)Assembly;
+        public string FeatureFilePath => Path.Combine(SpecFlowProject.FeatureFilesFolder, Name);
+
         public IEnumerable<IAttributeInfo> GetCustomAttributes(string assemblyQualifiedAttributeTypeName)
         {
             yield break;

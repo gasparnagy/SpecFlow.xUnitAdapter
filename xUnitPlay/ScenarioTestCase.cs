@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
@@ -11,6 +12,8 @@ namespace xUnitPlay
     [Serializable]
     public class ScenarioTestCase : ITestCase, ITestMethod, IMethodInfo, IXunitTestCase, IReflectionMethodInfo
     {
+        public FeatureFileTypeInfo FeatureFile => (FeatureFileTypeInfo)TestClass;
+
         public void Deserialize(IXunitSerializationInfo info)
         {
             throw new NotImplementedException();
@@ -29,11 +32,12 @@ namespace xUnitPlay
         public Dictionary<string, List<string>> Traits { get; set; }
         public string UniqueID { get; set; }
 
-        public ScenarioTestCase(ITestClass testClass)
+        public ScenarioTestCase(FeatureFileTypeInfo featureFileTypeInfo, string scenarioTitle)
         {
-            TestClass = testClass;
-            DisplayName = "Scenario 1";
-            UniqueID = DisplayName;
+            TestClass = featureFileTypeInfo;
+            Name = scenarioTitle;
+            DisplayName = scenarioTitle;
+            UniqueID = $"{featureFileTypeInfo.Name};{scenarioTitle}";
         }
 
         /// <inheritdoc/>
@@ -70,7 +74,7 @@ namespace xUnitPlay
         public bool IsGenericMethodDefinition { get; set; }
         public bool IsPublic { get { return true; } }
         public bool IsStatic { get; set; }
-        public string Name { get { return UniqueID; } }
+        public string Name { get; set; }
         public ITypeInfo ReturnType { get; set; }
         public ITypeInfo Type { get { return TestClass.Class; } }
         public MethodInfo MethodInfo { get { throw new NotImplementedException("MethodInfo");} }

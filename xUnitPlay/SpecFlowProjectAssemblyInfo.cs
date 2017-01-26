@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -11,11 +12,14 @@ namespace xUnitPlay
     [Serializable]
     public class SpecFlowProjectAssemblyInfo : IAssemblyInfo
     {
-        private IAssemblyInfo originalAssemblyInfo;
+        public string FeatureFilesFolder { get; private set; }
+
+        private readonly IAssemblyInfo originalAssemblyInfo;
 
         public SpecFlowProjectAssemblyInfo(IAssemblyInfo originalAssemblyInfo)
         {
             this.originalAssemblyInfo = originalAssemblyInfo;
+            FeatureFilesFolder = Path.GetFullPath(Path.GetDirectoryName(originalAssemblyInfo.AssemblyPath));
         }
 
         public IEnumerable<IAttributeInfo> GetCustomAttributes(string assemblyQualifiedAttributeTypeName)
@@ -30,8 +34,13 @@ namespace xUnitPlay
 
         public IEnumerable<ITypeInfo> GetTypes(bool includePrivateTypes)
         {
-            yield return new FeatureFileTypeInfo("Feature1", this);
-            //yield return new FeatureFile("Feature2", this);
+            Console.WriteLine($"    Discovering feature files from folder {FeatureFilesFolder}");
+            foreach (var featureFilePath in Directory.GetFiles(FeatureFilesFolder, "*.feature", SearchOption.AllDirectories))
+            {
+                var relativePath = featureFilePath.Substring(FeatureFilesFolder.Length).TrimStart(Path.DirectorySeparatorChar);
+                Console.WriteLine($"      {relativePath}");
+                yield return new FeatureFileTypeInfo(relativePath, this);
+            }
         }
 
         public string AssemblyPath

@@ -1,4 +1,6 @@
-﻿using Xunit.Abstractions;
+﻿using System.Linq;
+using Gherkin.Ast;
+using Xunit.Abstractions;
 using Xunit.Sdk;
 
 namespace xUnitPlay
@@ -18,7 +20,17 @@ namespace xUnitPlay
         protected override bool FindTestsForType(ITestClass testClass, bool includeSourceInformation, IMessageBus messageBus,
             ITestFrameworkDiscoveryOptions discoveryOptions)
         {
-            return messageBus.QueueMessage(new TestCaseDiscoveryMessage(new ScenarioTestCase(testClass)));
+            var featureFileTypeInfo = (FeatureFileTypeInfo)testClass;
+            var gherkinDocument = SpecFlowParserHelper.ParseSpecFlowDocument(featureFileTypeInfo.FeatureFilePath).Result;
+            if (gherkinDocument.SpecFlowFeature != null)
+            {
+                foreach (var scenario in gherkinDocument.SpecFlowFeature.ScenarioDefinitions.OfType<Scenario>())
+                {
+                    if (!messageBus.QueueMessage(new TestCaseDiscoveryMessage(new ScenarioTestCase(featureFileTypeInfo, scenario.Name))))
+                        return false;
+                }
+            }
+            return true;
         }
     }
 }
