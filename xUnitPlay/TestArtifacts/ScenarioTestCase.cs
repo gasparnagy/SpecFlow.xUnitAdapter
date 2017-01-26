@@ -16,14 +16,17 @@ namespace xUnitPlay.TestArtifacts
         public FeatureFileTestClass FeatureFile { get; private set; }
         public string Name { get; private set; }
 
-        public string DisplayName => Name;
-        public string UniqueID => $"{FeatureFile.RelativePath};{Name}";
+        public string DisplayName => GetDisplayName();
+
+        public string UniqueID => $"{FeatureFile.RelativePath};{Name};{ExampleId}";
 
         public ISourceInformation SourceInformation { get; set; }
         public string SkipReason { get; set; }
         public Dictionary<string, List<string>> Traits { get; set; }
-        object[] ITestCase.TestMethodArguments => null;
+        public Dictionary<string,string> ScenarioOutlineParameters { get; set; }
+        public string ExampleId { get; set; }
 
+        object[] ITestCase.TestMethodArguments => ScenarioOutlineParameters?.Cast<object>().ToArray();
         public ITestClass TestClass => FeatureFile;
         public ITestMethod TestMethod => this;
         public IMethodInfo Method => this;
@@ -33,12 +36,34 @@ namespace xUnitPlay.TestArtifacts
             Traits = new Dictionary<string, List<string>>();
         }
 
-        public ScenarioTestCase(FeatureFileTestClass featureFileTestClass, Scenario scenario, string[] featureTags) : this()
+        private ScenarioTestCase(FeatureFileTestClass featureFileTestClass, ScenarioDefinition scenario, string[] featureTags, Location location)
         {
             FeatureFile = featureFileTestClass;
             Name = scenario.Name;
-            SourceInformation = new SourceInformation { FileName = featureFileTestClass.FeatureFilePath, LineNumber = scenario.Location?.Line };
-            Traits.Add("Category", featureTags.Concat(scenario.Tags.GetTags()).ToList());
+            SourceInformation = new SourceInformation { FileName = featureFileTestClass.FeatureFilePath, LineNumber = location?.Line };
+            Traits = new Dictionary<string, List<string>>();
+            Traits.Add("Category", featureTags.Concat(((IHasTags)scenario).Tags.GetTags()).ToList());
+        }
+
+        public ScenarioTestCase(FeatureFileTestClass featureFileTestClass, Scenario scenario, string[] featureTags)
+            : this(featureFileTestClass, scenario, featureTags, scenario.Location)
+        {
+        }
+
+        public ScenarioTestCase(FeatureFileTestClass featureFileTestClass, ScenarioOutline scenario, string[] featureTags, Dictionary<string, string> scenarioOutlineParameters, string exampleId, Location exampleLocation) 
+            : this(featureFileTestClass, scenario, featureTags, exampleLocation)
+        {
+            ScenarioOutlineParameters = scenarioOutlineParameters;
+            ExampleId = exampleId;
+        }
+
+        private string GetDisplayName()
+        {
+            if (ScenarioOutlineParameters != null)
+            {
+                return $"{Name} ({string.Join(", ", ScenarioOutlineParameters.Select(p => $"{p.Key}: {p.Value}"))})";
+            }
+            return Name;
         }
 
         public void Deserialize(IXunitSerializationInfo data)

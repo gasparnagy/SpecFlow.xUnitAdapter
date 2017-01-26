@@ -30,11 +30,34 @@ namespace xUnitPlay.Framework
             {
                 featureFileTestClass.FeatureName = gherkinDocument.SpecFlowFeature.Name;
                 var featureTags = gherkinDocument.SpecFlowFeature.Tags.GetTags().ToArray();
-                foreach (var scenario in gherkinDocument.SpecFlowFeature.ScenarioDefinitions.OfType<Scenario>())
+                foreach (var scenarioDefinition in gherkinDocument.SpecFlowFeature.ScenarioDefinitions.Where(sd => !(sd is Background)))
                 {
-                    var scenarioTestCase = new ScenarioTestCase(featureFileTestClass, scenario, featureTags);
-                    if (!messageBus.QueueMessage(new TestCaseDiscoveryMessage(scenarioTestCase)))
-                        return false;
+                    var scenario = scenarioDefinition as Scenario;
+                    if (scenario != null)
+                    {
+                        var scenarioTestCase = new ScenarioTestCase(featureFileTestClass, scenario, featureTags);
+                        if (!messageBus.QueueMessage(new TestCaseDiscoveryMessage(scenarioTestCase)))
+                            return false;
+                    }
+                    var scenarioOutline = scenarioDefinition as ScenarioOutline;
+                    if (scenarioOutline != null)
+                    {
+                        int exampleRowId = 0;
+                        foreach (var example in scenarioOutline.Examples)
+                        {
+                            foreach (var exampleRow in example.TableBody)
+                            {
+                                var parameters = example.TableHeader.Cells
+                                    .Zip(exampleRow.Cells, (keyCell, valueCell) => new { Key = keyCell.Value, valueCell.Value })
+                                    .ToDictionary(arg => arg.Key, arg => arg.Value);
+
+                                var scenarioOutlineTestCase = new ScenarioTestCase(featureFileTestClass, scenarioOutline, featureTags, parameters, (++exampleRowId).ToString(), exampleRow.Location);
+                                if (!messageBus.QueueMessage(new TestCaseDiscoveryMessage(scenarioOutlineTestCase)))
+                                    return false;
+                            }
+                        }
+                    }
+                    
                 }
             }
             return true;
