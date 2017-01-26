@@ -11,7 +11,7 @@ using Xunit.Sdk;
 namespace xUnitPlay
 {
     [Serializable]
-    public class SpecFlowProjectAssemblyInfo : IAssemblyInfo, IXunitSerializable
+    public class SpecFlowProjectAssemblyInfo : LongLivedMarshalByRefObject, IAssemblyInfo, IXunitSerializable
     {
         public string FeatureFilesFolder => Path.GetFullPath(Path.GetDirectoryName(originalAssemblyInfo.AssemblyPath));
 

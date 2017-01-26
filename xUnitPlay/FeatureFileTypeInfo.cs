@@ -7,7 +7,7 @@ using Xunit.Sdk;
 namespace xUnitPlay
 {
     [Serializable]
-    public class FeatureFileTypeInfo : ITypeInfo, ITestClass, IReflectionTypeInfo
+    public class FeatureFileTypeInfo : LongLivedMarshalByRefObject, ITypeInfo, ITestClass, IReflectionTypeInfo
     {
         public SpecFlowProjectAssemblyInfo SpecFlowProject => (SpecFlowProjectAssemblyInfo)Assembly;
         public string FeatureFilePath => Path.Combine(SpecFlowProject.FeatureFilesFolder, Name);

@@ -10,7 +10,7 @@ using Xunit.Sdk;
 namespace xUnitPlay
 {
     [Serializable]
-    public class ScenarioTestCase : ITestCase, ITestMethod, IMethodInfo, IXunitTestCase, IReflectionMethodInfo
+    public class ScenarioTestCase : LongLivedMarshalByRefObject, ITestCase, ITestMethod, IMethodInfo, IXunitTestCase, IReflectionMethodInfo
     {
         public FeatureFileTypeInfo FeatureFile => (FeatureFileTypeInfo)TestClass;
 

@@ -82,21 +82,10 @@ namespace xUnitPlay
             }
             else
             {
-                FeatureSetup(gherkinDocument);
-
                 var aggregator = new ExceptionAggregator(Aggregator);
                 if (!aggregator.HasExceptions)
                 {
-                    var scenarioInfo = new ScenarioInfo(scenario.Name, scenario.Tags.Select(t => t.Name).ToArray());
-                    ScenarioSetup(scenarioInfo);
-
-                    foreach (var step in scenario.Steps.Cast<SpecFlowStep>())
-                    {
-                        output.AppendLine($"> Running {step.Keyword}{step.Text}");
-                        ExecuteStep(step);
-                    }
-
-                    ScenarioCleanup();
+                    aggregator.Run(() => RunScenario(gherkinDocument, scenario, output));
                 }
 
                 var exception = aggregator.ToException();
@@ -117,10 +106,26 @@ namespace xUnitPlay
             if (!MessageBus.QueueMessage(new TestFinished(test, summary.Time, output.ToString())))
                 CancellationTokenSource.Cancel();
 
+            return summary;
+        }
+
+        private void RunScenario(SpecFlowDocument gherkinDocument, Scenario scenario, StringBuilder output)
+        {
+            FeatureSetup(gherkinDocument);
+
+            var scenarioInfo = new ScenarioInfo(scenario.Name, scenario.Tags.Select(t => t.Name).ToArray());
+            ScenarioSetup(scenarioInfo);
+
+            foreach (var step in scenario.Steps.Cast<SpecFlowStep>())
+            {
+                output.AppendLine($"> Running {step.Keyword}{step.Text}");
+                ExecuteStep(step);
+            }
+
+            ScenarioCleanup();
+
             ScenarioTearDown();
             FeatureTearDown(); //TODO: call in finally?
-
-            return summary;
         }
 
         private void ExecuteStep(SpecFlowStep step)
