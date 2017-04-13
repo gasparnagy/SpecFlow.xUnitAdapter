@@ -30,8 +30,19 @@ namespace SpecFlow.xUnitAdapter.SpecFlowPlugin.Runners
 
             var assembly = Assembly.LoadFrom(TestCase.FeatureFile.SpecFlowProject.AssemblyPath);
             testRunner = TestRunnerManager.GetTestRunner(assembly);
-            var featureInfo = new FeatureInfo(new CultureInfo("en-US"), feature.Name, feature.Description, ProgrammingLanguage.CSharp, feature.Tags.GetTags().ToArray());
+            var featureInfo = new FeatureInfo(GetFeatureCulture(feature.Language), feature.Name, feature.Description, ProgrammingLanguage.CSharp, feature.Tags.GetTags().ToArray());
             testRunner.OnFeatureStart(featureInfo);
+        }
+
+        private CultureInfo GetFeatureCulture(string language)
+        {
+            var culture = new CultureInfo(language);
+            if (culture.IsNeutralCulture)
+            {
+                return new CultureInfo("en-US"); //TODO: find the "default" specific culture for the neutral culture, like 'en-US' for 'en'. This is currently in the SpecFlow generator
+            }
+
+            return culture;
         }
 
         public void FeatureTearDown()
