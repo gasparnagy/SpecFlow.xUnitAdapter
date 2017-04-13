@@ -65,6 +65,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SpecFlow.xUnitAdapter.Config.cs" />
     <Compile Include="StepDefinitions.cs" />
   </ItemGroup>
   <ItemGroup>

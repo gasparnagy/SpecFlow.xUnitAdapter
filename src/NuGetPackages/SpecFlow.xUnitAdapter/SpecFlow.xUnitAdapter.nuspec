@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<package xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <metadata xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <id>SpecFlow.xUnitAdapter</id>
+    <version>1.0.0-localdev</version>
+    <title>xUnit adapter for SpecFlow that allows running scenarios without code generation</title>
+    <authors>Gaspar Nagy, Spec Solutions</authors>
+    <owners>Gaspar Nagy, Spec Solutions</owners>
+    <description>xUnit adapter for SpecFlow that allows running scenarios without code generation.</description>
+    <summary>xUnit adapter for SpecFlow that allows running scenarios without code generation.</summary>
+    <releaseNotes>See GitHub project page, https://github.com/gasparnagy/SpecFlow.xUnitAdapter/releases</releaseNotes>
+    <language>en-US</language>
+    <projectUrl>https://github.com/gasparnagy/SpecFlow.xUnitAdapter</projectUrl>
+    <licenseUrl>https://github.com/gasparnagy/SpecFlow.xUnitAdapter/master/LICENSE</licenseUrl>
+    <iconUrl>http://go.specflow.org/specflow-nuget-icon</iconUrl>
+    <copyright>Copyright © 2017 Gaspar Nagy, Spec Solutions</copyright>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <tags>specflow bdd xunit</tags>
+    <dependencies>
+      <dependency id="SpecFlow" version="2.1.0" />
+      <dependency id="xunit" version="2.2.0" />
+    </dependencies>
+  </metadata>
+</package>

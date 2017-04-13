@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpecFlow.xUnitAdapter.SpecF
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpecFlow.xUnitAdapter.TestProject", "tests\SpecFlow.xUnitAdapter.TestProject\SpecFlow.xUnitAdapter.TestProject.csproj", "{23B6FA2E-CFB0-4D32-A40D-D29C8CC8DF45}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NuGetPackages", "NuGetPackages\NuGetPackages.csproj", "{B967FFB8-7BF4-4889-99BF-D8B4FA6A0B5A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{23B6FA2E-CFB0-4D32-A40D-D29C8CC8DF45}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{23B6FA2E-CFB0-4D32-A40D-D29C8CC8DF45}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{23B6FA2E-CFB0-4D32-A40D-D29C8CC8DF45}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B967FFB8-7BF4-4889-99BF-D8B4FA6A0B5A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B967FFB8-7BF4-4889-99BF-D8B4FA6A0B5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B967FFB8-7BF4-4889-99BF-D8B4FA6A0B5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B967FFB8-7BF4-4889-99BF-D8B4FA6A0B5A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
