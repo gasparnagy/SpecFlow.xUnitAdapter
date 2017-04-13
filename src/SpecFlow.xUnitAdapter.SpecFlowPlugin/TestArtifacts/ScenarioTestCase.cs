@@ -6,6 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Gherkin.Ast;
 using SpecFlow.xUnitAdapter.SpecFlowPlugin.Runners;
+using Xunit;
 using Xunit.Abstractions;
 using Xunit.Sdk;
 
