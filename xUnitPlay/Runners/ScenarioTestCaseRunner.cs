@@ -140,16 +140,21 @@ namespace xUnitPlay.Runners
                 steps = gherkinDocument.SpecFlowFeature.Background.Steps.Cast<SpecFlowStep>().Concat(steps);
             }
 
-            foreach (var step in steps)
+            try
             {
-                output.AppendLine($"> Running {step.Keyword}{step.Text}");
-                ExecuteStep(step);
+                foreach (var step in steps)
+                {
+                    output.AppendLine($"> Running {step.Keyword}{step.Text}");
+                    ExecuteStep(step);
+                }
+
+                ScenarioCleanup(); // normally this is the point when the scenario errors are thrown
             }
-
-            ScenarioCleanup();
-
-            ScenarioTearDown();
-            FeatureTearDown(); //TODO: call in finally?
+            finally
+            {
+                ScenarioTearDown();
+                FeatureTearDown();
+            }
         }
 
         private void ExecuteStep(SpecFlowStep step)
