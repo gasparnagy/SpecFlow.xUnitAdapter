@@ -12,8 +12,8 @@ Scenario: Add two numbers
 	Then the result should be 120 on the screen
 
 @mytag @othertag
-Scenario: Multiply two numbers
+Scenario: A failing scenario
 	Given I have entered 50 into the calculator
 	And I have entered 70 into the calculator
-	When I press multiply
+	When there is a failing step
 	Then the result should be 120 on the screen

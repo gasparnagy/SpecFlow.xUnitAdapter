@@ -4,35 +4,36 @@
 	I want to be told the sum of two numbers
 
 Background: 
-	Given there is a background
+	Given I have entered 50 into the calculator
 
 @mytag
-Scenario: Add two numbers C
-	Given I have entered 50 into the calculator
-	And I have entered 70 into the calculator
+Scenario: Add two numbers with Background
+	Given I have entered 70 into the calculator
 	When I press add
 	Then the result should be 120 on the screen
 
 @mytag
-Scenario: Add two numbers D
-	Given I have entered the following numbers into the calculator:
+Scenario: Add two numbers with DataTable
+	Given there is a new calcualtor
+	And I have entered the following numbers into the calculator:
 		| number |
 		| 50     |
 		| 70     |
 	When I press add
 	Then the result should be 120 on the screen
 
-Scenario Outline: Add two numbers with SO
-	Given I have entered <a> into the calculator
+Scenario Outline: Add two numbers as Scenario Outline
+	Given there is a new calcualtor
+	And I have entered <a> into the calculator
 	And I have entered <b> into the calculator
 	When I press add
 	Then the result should be <result> on the screen
 
 Examples: 
-	| a | b | result |
-	| 1 | 2 | 3      |
-	| 3 | 4 | 7      |
-	| 3 | 4 | 42     |
+	| case    | a | b | result |
+	| basic   | 1 | 2 | 3      |
+	| seven   | 3 | 4 | 7      |
+	| failing | 3 | 4 | 42     |
 
 @ignore
 Scenario: Ignored scenario

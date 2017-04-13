@@ -7,15 +7,15 @@ using Xunit;
 namespace SpecFlow.xUnitAdapter.TestProject
 {
     [Binding]
-    public sealed class StepDefinition1
+    public sealed class StepDefinitions
     {
         private List<int> numbers = new List<int>();
         private int? result;
-            
-        [Given(@"there is a background")]
-        public void GivenThereIsABackground()
+
+        [Given(@"there is a new calcualtor")]
+        public void GivenThereIsANewCalcualtor()
         {
-            Console.WriteLine("Running Background step");
+            numbers.Clear();
         }
 
         [Given("I have entered (.*) into the calculator")]
@@ -41,8 +41,8 @@ namespace SpecFlow.xUnitAdapter.TestProject
             result = numbers.Sum();
         }
 
-        [When(@"I press multiply")]
-        public void WhenIPressMultiply()
+        [When(@"there is a failing step")]
+        public void WhenThereIsAFailingStep()
         {
             throw new Exception("this has failed");
         }
