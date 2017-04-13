@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpecFlow.xUnitAdapter.SpecFlowPlugin", "xUnitPlay\SpecFlow.xUnitAdapter.SpecFlowPlugin.csproj", "{1DD1877B-E008-4383-AE65-69A55264C5BA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpecFlow.xUnitAdapter.SpecFlowPlugin", "SpecFlow.xUnitAdapter.SpecFlowPlugin\SpecFlow.xUnitAdapter.SpecFlowPlugin.csproj", "{1DD1877B-E008-4383-AE65-69A55264C5BA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpecFlow.xUnitAdapter.Sample.MyCalculator", "xUnitPlay.SpecFlowProject\SpecFlow.xUnitAdapter.Sample.MyCalculator.csproj", "{23B6FA2E-CFB0-4D32-A40D-D29C8CC8DF45}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpecFlow.xUnitAdapter.TestProject", "tests\SpecFlow.xUnitAdapter.TestProject\SpecFlow.xUnitAdapter.TestProject.csproj", "{23B6FA2E-CFB0-4D32-A40D-D29C8CC8DF45}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

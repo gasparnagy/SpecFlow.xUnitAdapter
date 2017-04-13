@@ -4,7 +4,7 @@ using System.Linq;
 using TechTalk.SpecFlow;
 using Xunit;
 
-namespace SpecFlow.xUnitAdapter.Sample.MyCalculator
+namespace SpecFlow.xUnitAdapter.TestProject
 {
     [Binding]
     public sealed class StepDefinition1
