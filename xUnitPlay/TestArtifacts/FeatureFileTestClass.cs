@@ -43,7 +43,7 @@ namespace xUnitPlay.TestArtifacts
             SpecFlowProject = specFlowProject;
             RelativePath = relativePath;
 
-            TestCollection = new TestCollection(new TestAssembly(specFlowProject, null), null, "My Collectin"); //TODO
+            TestCollection = new TestCollection(new TestAssembly(specFlowProject, null), null, "Default Collection"); //TODO: support test collections for parallelization
         }
 
         public void Deserialize(IXunitSerializationInfo data)

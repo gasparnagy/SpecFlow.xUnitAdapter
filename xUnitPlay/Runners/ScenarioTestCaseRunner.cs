@@ -58,7 +58,7 @@ namespace xUnitPlay.Runners
 
         protected override async Task<RunSummary> RunTestAsync()
         {
-            var test = new XunitTest(TestCase, TestCase.DisplayName); //TODO: this is a pickle
+            var test = new XunitTest(TestCase, TestCase.DisplayName); //TODO: this is a pickle, we could use the Compiler/Pickle interfaces from the Gherkin parser
             var summary = new RunSummary() { Total = 1 };
             var output = new StringBuilder();
 
