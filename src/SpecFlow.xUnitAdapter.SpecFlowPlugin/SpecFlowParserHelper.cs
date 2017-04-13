@@ -11,10 +11,16 @@ namespace SpecFlow.xUnitAdapter.SpecFlowPlugin
 {
     public static class SpecFlowParserHelper
     {
+        private static SpecFlowGherkinParser CreateParser()
+        {
+            var parser = new SpecFlowGherkinParser(new CultureInfo("en-US")); //TODO: use specflow configuration
+            return parser;
+        }
+
         public static async Task<SpecFlowDocument> ParseSpecFlowDocumentAsync(string featureFilePath)
         {
             var fileContent = await ReadAllTextAsync(featureFilePath);
-            var parser = new SpecFlowGherkinParser(new CultureInfo("en-US"));
+            var parser = CreateParser();
             var gherkinDocument = parser.Parse(new StringReader(fileContent), featureFilePath);
             return gherkinDocument;
         }
@@ -23,7 +29,7 @@ namespace SpecFlow.xUnitAdapter.SpecFlowPlugin
         {
             using (var reader = new StreamReader(featureFilePath))
             {
-                var parser = new SpecFlowGherkinParser(new CultureInfo("en-US"));
+                var parser = CreateParser();
                 var gherkinDocument = parser.Parse(reader, featureFilePath);
                 return gherkinDocument;
             }
@@ -106,7 +112,6 @@ namespace SpecFlow.xUnitAdapter.SpecFlowPlugin
         {
             var parameters = GetScenarioOutlineParameters(example, exampleRow);
             var steps = new List<Step>();
-            //steps.AddRange(backgroundSteps);
 
             var tags = new List<Tag>();
             tags.AddRange(scenarioOutline.Tags);
