@@ -13,6 +13,15 @@ Scenario: Add two numbers C
 	When I press add
 	Then the result should be 120 on the screen
 
+@mytag
+Scenario: Add two numbers D
+	Given I have entered the following numbers into the calculator:
+		| number |
+		| 50     |
+		| 70     |
+	When I press add
+	Then the result should be 120 on the screen
+
 Scenario Outline: Add two numbers with SO
 	Given I have entered <a> into the calculator
 	And I have entered <b> into the calculator
