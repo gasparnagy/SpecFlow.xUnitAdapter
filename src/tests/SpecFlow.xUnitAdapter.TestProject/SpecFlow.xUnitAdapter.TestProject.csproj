@@ -77,9 +77,18 @@
     <None Include="SpecFlowFeature2.feature">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="SpecFlowFeature3.feature">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\SpecFlow.xUnitAdapter.SpecFlowPlugin\SpecFlow.xUnitAdapter.SpecFlowPlugin.csproj">
+      <Project>{1dd1877b-e008-4383-ae65-69a55264c5ba}</Project>
+      <Name>SpecFlow.xUnitAdapter.SpecFlowPlugin</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
