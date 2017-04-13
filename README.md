@@ -15,7 +15,7 @@ Check the complete example at https://github.com/gasparnagy/SpecFlow.xUnitAdapte
 
 If you like this plugin and would like to support developing this or similar plugins, please consider donating the project. (For receiving an invoice for your donation, please [contact me](http://gasparnagy.com/about/) upfront.)
 
-![Donate!](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=2FHWS4JADYFZN)
+[![Donate](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=2FHWS4JADYFZN)
 
 ## Usage
 
