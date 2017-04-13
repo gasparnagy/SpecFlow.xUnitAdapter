@@ -48,6 +48,7 @@
     <None Include="SpecFlow.xUnitAdapter\SpecFlow.xUnitAdapter.nuspec.props" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="SpecFlow.xUnitAdapter\readme.txt" />
     <Content Include="SpecFlow.xUnitAdapter\SpecFlow.xUnitAdapter.Config.cs" />
   </ItemGroup>
   <Import Condition="Exists('$(MSBuildProjectDirectory)\.build\build.props')" Project="$(MSBuildProjectDirectory)\.build\build.props" />

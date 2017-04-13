@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("xUnitPlay")]
+[assembly: AssemblyTitle("SpecFlow.xUnitAdapter (SpecFlow plugin)")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("xUnitPlay")]
-[assembly: AssemblyCopyright("Copyright ©  2017")]
+[assembly: AssemblyCompany("Spec Solutions")]
+[assembly: AssemblyProduct("SpecFlow.xUnitAdapter")]
+[assembly: AssemblyCopyright("Copyright © 2017 Gaspar Nagy, Spec Solutions")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
