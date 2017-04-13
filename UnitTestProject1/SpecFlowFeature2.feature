@@ -1,1 +1,0 @@
-﻿Funktionalität: SpecFlowFeature2
