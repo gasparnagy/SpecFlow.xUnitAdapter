@@ -38,3 +38,6 @@ Examples:
 @ignore
 Scenario: Ignored scenario
 	Given something wrong
+
+Scenario: Undefined scenario
+	Given there is an undefined step
