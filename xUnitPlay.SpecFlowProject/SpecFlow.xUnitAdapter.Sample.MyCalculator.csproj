@@ -8,8 +8,8 @@
     <ProjectGuid>{23B6FA2E-CFB0-4D32-A40D-D29C8CC8DF45}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>xUnitPlay.SpecFlowProject</RootNamespace>
-    <AssemblyName>xUnitPlay.SpecFlowProject</AssemblyName>
+    <RootNamespace>SpecFlow.xUnitAdapter.Sample.MyCalculator</RootNamespace>
+    <AssemblyName>SpecFlow.xUnitAdapter.Sample.MyCalculator</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <NuGetPackageImportStamp>
@@ -77,9 +77,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\xUnitPlay\xUnitPlay.csproj">
+    <ProjectReference Include="..\xUnitPlay\SpecFlow.xUnitAdapter.SpecFlowPlugin.csproj">
       <Project>{1dd1877b-e008-4383-ae65-69a55264c5ba}</Project>
-      <Name>xUnitPlay</Name>
+      <Name>SpecFlow.xUnitAdapter.SpecFlowPlugin</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

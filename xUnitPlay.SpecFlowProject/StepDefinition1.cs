@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using TechTalk.SpecFlow;
 using Xunit;
 
-namespace xUnitPlay.SpecFlowProject
+namespace SpecFlow.xUnitAdapter.Sample.MyCalculator
 {
     [Binding]
     public sealed class StepDefinition1

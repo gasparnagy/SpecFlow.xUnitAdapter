@@ -7,8 +7,8 @@
     <ProjectGuid>{1DD1877B-E008-4383-AE65-69A55264C5BA}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>xUnitPlay</RootNamespace>
-    <AssemblyName>xUnitPlay</AssemblyName>
+    <RootNamespace>SpecFlow.xUnitAdapter.SpecFlowPlugin</RootNamespace>
+    <AssemblyName>SpecFlow.xUnitAdapter.SpecFlowPlugin</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
