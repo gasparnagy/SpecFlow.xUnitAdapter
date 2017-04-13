@@ -1,9 +1,8 @@
-﻿using System.Reflection;
-using xUnitPlay.Framework;
+﻿using SpecFlow.xUnitAdapter.SpecFlowPlugin.Framework;
 using Xunit.Abstractions;
 using Xunit.Sdk;
 
-namespace xUnitPlay
+namespace SpecFlow.xUnitAdapter.SpecFlowPlugin
 {
     public class SpecFlowTestFramework : XunitTestFramework
     {

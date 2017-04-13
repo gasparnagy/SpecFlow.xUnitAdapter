@@ -1,11 +1,11 @@
 using System.Collections.Generic;
 using System.Reflection;
-using xUnitPlay.Framework;
-using xUnitPlay.TestArtifacts;
+using SpecFlow.xUnitAdapter.SpecFlowPlugin.Framework;
+using SpecFlow.xUnitAdapter.SpecFlowPlugin.TestArtifacts;
 using Xunit.Abstractions;
 using Xunit.Sdk;
 
-namespace xUnitPlay
+namespace SpecFlow.xUnitAdapter.SpecFlowPlugin
 {
     public class SpecFlowTestFrameworkExecutor : TestFrameworkExecutor<ScenarioTestCase>
     {

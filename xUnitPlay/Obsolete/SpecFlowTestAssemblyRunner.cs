@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Xunit.Abstractions;
 using Xunit.Sdk;
 
-namespace xUnitPlay
+namespace SpecFlow.xUnitAdapter.SpecFlowPlugin
 {
     public class SpecFlowTestAssemblyRunner : XunitTestAssemblyRunner
     {

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Xunit.Abstractions;
 using Xunit.Sdk;
 
-namespace xUnitPlay
+namespace SpecFlow.xUnitAdapter.SpecFlowPlugin
 {
     public class SpecFlowTestCollectionRunner : XunitTestCollectionRunner
     {

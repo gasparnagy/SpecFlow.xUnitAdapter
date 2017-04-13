@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Linq;
-using System.Threading.Tasks;
 using Gherkin.Ast;
-using TechTalk.SpecFlow.Parser;
-using xUnitPlay.TestArtifacts;
+using SpecFlow.xUnitAdapter.SpecFlowPlugin.TestArtifacts;
 using Xunit.Abstractions;
 using Xunit.Sdk;
 
-namespace xUnitPlay.Framework
+namespace SpecFlow.xUnitAdapter.SpecFlowPlugin.Framework
 {
     public class SpecFlowTestDiscoverer : TestFrameworkDiscoverer
     {

@@ -3,14 +3,11 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Gherkin.Ast;
 using TechTalk.SpecFlow.Parser;
-using xUnitPlay.TestArtifacts;
-using Xunit.Sdk;
 
-namespace xUnitPlay
+namespace SpecFlow.xUnitAdapter.SpecFlowPlugin
 {
     public static class SpecFlowParserHelper
     {

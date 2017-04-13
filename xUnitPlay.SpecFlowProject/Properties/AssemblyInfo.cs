@@ -35,4 +35,4 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
 
-[assembly: Xunit.TestFramework("xUnitPlay.SpecFlowTestFramework", "SpecFlow.xUnitAdapter.SpecFlowPlugin")]
+[assembly: Xunit.TestFramework("SpecFlow.xUnitAdapter.SpecFlowPlugin.SpecFlowTestFramework", "SpecFlow.xUnitAdapter.SpecFlowPlugin")]

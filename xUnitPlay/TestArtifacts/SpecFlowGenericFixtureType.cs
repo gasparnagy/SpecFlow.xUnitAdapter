@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 
-namespace xUnitPlay.TestArtifacts
+namespace SpecFlow.xUnitAdapter.SpecFlowPlugin.TestArtifacts
 {
     public class SpecFlowGenericFixtureType
     {

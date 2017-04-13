@@ -5,11 +5,11 @@ using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 using Gherkin.Ast;
-using xUnitPlay.Runners;
+using SpecFlow.xUnitAdapter.SpecFlowPlugin.Runners;
 using Xunit.Abstractions;
 using Xunit.Sdk;
 
-namespace xUnitPlay.TestArtifacts
+namespace SpecFlow.xUnitAdapter.SpecFlowPlugin.TestArtifacts
 {
     public class ScenarioTestCase : LongLivedMarshalByRefObject, ITestMethod, IXunitTestCase, IReflectionMethodInfo
     {

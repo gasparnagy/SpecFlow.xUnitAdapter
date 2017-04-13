@@ -5,7 +5,7 @@ using System.Linq;
 using Xunit.Abstractions;
 using Xunit.Sdk;
 
-namespace xUnitPlay.TestArtifacts
+namespace SpecFlow.xUnitAdapter.SpecFlowPlugin.TestArtifacts
 {
     public class FeatureFileTestClass : LongLivedMarshalByRefObject, ITypeInfo, IReflectionTypeInfo, ITestClass
     {

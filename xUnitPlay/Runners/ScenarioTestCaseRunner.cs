@@ -8,12 +8,12 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Gherkin.Ast;
+using SpecFlow.xUnitAdapter.SpecFlowPlugin.TestArtifacts;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Parser;
-using xUnitPlay.TestArtifacts;
 using Xunit.Sdk;
 
-namespace xUnitPlay.Runners
+namespace SpecFlow.xUnitAdapter.SpecFlowPlugin.Runners
 {
     public class ScenarioTestCaseRunner : TestCaseRunner<ScenarioTestCase>
     {
