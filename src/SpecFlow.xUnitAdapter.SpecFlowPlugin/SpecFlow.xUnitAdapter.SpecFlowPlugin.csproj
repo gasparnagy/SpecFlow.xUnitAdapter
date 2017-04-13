@@ -78,17 +78,13 @@
   <ItemGroup>
     <Compile Include="TestArtifacts\FeatureFileTestClass.cs" />
     <Compile Include="Runners\ScenarioTestCaseRunner.cs" />
-    <Compile Include="Obsolete\SpecFlowFeatureRunner.cs" />
     <Compile Include="TestArtifacts\SpecFlowGenericFixtureType.cs" />
     <Compile Include="SpecFlowParserHelper.cs" />
-    <Compile Include="Obsolete\SpecFlowTestAssemblyRunner.cs" />
-    <Compile Include="Obsolete\SpecFlowTestCollectionRunner.cs" />
     <Compile Include="Framework\SpecFlowTestDiscoverer.cs" />
     <Compile Include="Framework\SpecFlowTestFramework.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestArtifacts\ScenarioTestCase.cs" />
     <Compile Include="TestArtifacts\SpecFlowProjectAssemblyInfo.cs" />
-    <Compile Include="Obsolete\SpecFlowTestFrameworkExecutor.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
