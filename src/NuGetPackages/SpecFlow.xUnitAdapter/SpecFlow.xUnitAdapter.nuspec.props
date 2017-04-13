@@ -8,6 +8,13 @@
       <targetFolder>SpecFlow.xUnitAdapter\lib\net45</targetFolder>
     </additionalFiles>
 
+    <additionalFiles Include="$(MSBuildThisFileDirectory)\..\..\SpecFlow.xUnitAdapter.SpecFlowPlugin\bin\$(Configuration)\Gherkin.dll">
+      <targetFolder>SpecFlow.xUnitAdapter\lib\net45</targetFolder>
+    </additionalFiles>
+    <additionalFiles Include="$(MSBuildThisFileDirectory)\..\..\SpecFlow.xUnitAdapter.SpecFlowPlugin\bin\$(Configuration)\TechTalk.SpecFlow.Parser.dll">
+      <targetFolder>SpecFlow.xUnitAdapter\lib\net45</targetFolder>
+    </additionalFiles>
+
     <additionalFiles Include="$(MSBuildThisFileDirectory)\SpecFlow.xUnitAdapter.Config.cs">
       <targetFolder>SpecFlow.xUnitAdapter\content</targetFolder>
     </additionalFiles>
