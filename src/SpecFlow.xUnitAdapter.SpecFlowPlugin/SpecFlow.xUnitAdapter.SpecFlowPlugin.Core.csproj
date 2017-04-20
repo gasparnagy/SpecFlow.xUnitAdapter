@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard1.4</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Gherkin" Version="4.0.1" />
+    <PackageReference Include="System.Runtime.Serialization.Formatters" Version="4.3.0" />
+    <PackageReference Include="xunit" Version="2.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Properties\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="TechTalk.SpecFlow.Core">
+      <HintPath>..\TemporaryDependencies\TechTalk.SpecFlow.Core\netstandard1.4\TechTalk.SpecFlow.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="TechTalk.SpecFlow.Parser.Core">
+      <HintPath>..\TemporaryDependencies\TechTalk.SpecFlow.Parser.Core\netstandard1.4\TechTalk.SpecFlow.Parser.Core.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

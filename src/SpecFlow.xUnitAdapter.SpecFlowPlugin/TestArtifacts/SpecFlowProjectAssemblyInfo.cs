@@ -60,7 +60,8 @@ namespace SpecFlow.xUnitAdapter.SpecFlowPlugin.TestArtifacts
         public void Deserialize(IXunitSerializationInfo data)
         {
             string assemblyName = data.GetValue<string>("OrigAssembly");
-            originalAssemblyInfo = Reflector.Wrap(Assembly.LoadFrom(assemblyName));
+            //originalAssemblyInfo = Reflector.Wrap(Assembly.LoadFrom(assemblyName));
+            originalAssemblyInfo = Reflector.Wrap(Assembly.Load(new AssemblyName(assemblyName)));
 
             //var an = new AssemblyName(assemblyName);
             //var assembly = Assembly.Load(new AssemblyName { Name = an.Name, Version = an.Version });
@@ -70,7 +71,7 @@ namespace SpecFlow.xUnitAdapter.SpecFlowPlugin.TestArtifacts
 
         public void Serialize(IXunitSerializationInfo data)
         {
-            data.AddValue("OrigAssembly", AssemblyPath);
+            data.AddValue("OrigAssembly", Name);
         }
     }
 }
