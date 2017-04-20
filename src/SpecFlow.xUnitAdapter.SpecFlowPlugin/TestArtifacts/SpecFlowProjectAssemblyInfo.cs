@@ -12,8 +12,7 @@ namespace SpecFlow.xUnitAdapter.SpecFlowPlugin.TestArtifacts
     [Serializable]
     public class SpecFlowProjectAssemblyInfo : LongLivedMarshalByRefObject, IAssemblyInfo, IXunitSerializable
     {
-        public string FeatureFilesFolder => Path.GetFullPath(Path.GetDirectoryName(originalAssemblyInfo.AssemblyPath));
-
+        public string FeatureFilesFolder { get; }
         private IAssemblyInfo originalAssemblyInfo;
 
         public SpecFlowProjectAssemblyInfo()
@@ -21,9 +20,10 @@ namespace SpecFlow.xUnitAdapter.SpecFlowPlugin.TestArtifacts
             
         }
 
-        public SpecFlowProjectAssemblyInfo(IAssemblyInfo originalAssemblyInfo)
+        public SpecFlowProjectAssemblyInfo(IAssemblyInfo originalAssemblyInfo, string featureFilesFolder)
         {
             this.originalAssemblyInfo = originalAssemblyInfo;
+            this.FeatureFilesFolder = featureFilesFolder;
         }
 
         public IEnumerable<IAttributeInfo> GetCustomAttributes(string assemblyQualifiedAttributeTypeName)
