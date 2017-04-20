@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26403.3
+VisualStudioVersion = 15.0.26403.7
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpecFlow.xUnitAdapter.SpecFlowPlugin", "SpecFlow.xUnitAdapter.SpecFlowPlugin\SpecFlow.xUnitAdapter.SpecFlowPlugin.csproj", "{1DD1877B-E008-4383-AE65-69A55264C5BA}"
 EndProject
@@ -17,7 +17,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpecFlow.xUnitAdapter.SpecFlowPlugin.Core", "SpecFlow.xUnitAdapter.SpecFlowPlugin\SpecFlow.xUnitAdapter.SpecFlowPlugin.Core.csproj", "{53C7CB4D-42FC-410D-A1B1-43147926E7C0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpecFlow.xUnitAdapter.TestProject.Core", "tests\SpecFlow.xUnitAdapter.TestProject.Core\SpecFlow.xUnitAdapter.TestProject.Core.csproj", "{F005D065-312F-486C-AAF1-3A14C441E8EA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpecFlow.xUnitAdapter.TestProject.Core", "tests\SpecFlow.xUnitAdapter.TestProject.Core\SpecFlow.xUnitAdapter.TestProject.Core.csproj", "{39F77222-8A8F-4D67-A3A3-A310C2EDFADA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,10 +41,10 @@ Global
 		{53C7CB4D-42FC-410D-A1B1-43147926E7C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{53C7CB4D-42FC-410D-A1B1-43147926E7C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{53C7CB4D-42FC-410D-A1B1-43147926E7C0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F005D065-312F-486C-AAF1-3A14C441E8EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F005D065-312F-486C-AAF1-3A14C441E8EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F005D065-312F-486C-AAF1-3A14C441E8EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F005D065-312F-486C-AAF1-3A14C441E8EA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{39F77222-8A8F-4D67-A3A3-A310C2EDFADA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{39F77222-8A8F-4D67-A3A3-A310C2EDFADA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{39F77222-8A8F-4D67-A3A3-A310C2EDFADA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{39F77222-8A8F-4D67-A3A3-A310C2EDFADA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,14 +1,13 @@
-﻿using System;
+using System;
 using Xunit;
 
 namespace SpecFlow.xUnitAdapter.TestProject.Core
 {
-    public class ManualTestClass
+    public class UnitTest1
     {
         [Fact]
-        public void TestThis()
+        public void Test1()
         {
-
         }
     }
 }
