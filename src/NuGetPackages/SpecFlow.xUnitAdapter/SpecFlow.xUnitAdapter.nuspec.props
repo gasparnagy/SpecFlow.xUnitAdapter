@@ -19,7 +19,7 @@
       <targetFolder>SpecFlow.xUnitAdapter\content</targetFolder>
     </additionalFiles>
 
-    <additionalFiles Include="$(MSBuildThisFileDirectory)\SpecFlow.xUnitAdapter.Config.cs">
+    <additionalFiles Include="$(MSBuildThisFileDirectory)\SpecFlow.xUnitAdapter.targets">
       <targetFolder>SpecFlow.xUnitAdapter\build</targetFolder>
     </additionalFiles>
 
