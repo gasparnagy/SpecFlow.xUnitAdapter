@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using Gherkin.Ast;
 using SpecFlow.xUnitAdapter.SpecFlowPlugin.TestArtifacts;
 using Xunit.Abstractions;
@@ -22,18 +21,18 @@ namespace SpecFlow.xUnitAdapter.SpecFlowPlugin.Framework
         protected override bool FindTestsForType(ITestClass testClass, bool includeSourceInformation, IMessageBus messageBus,
             ITestFrameworkDiscoveryOptions discoveryOptions)
         {
-            var featureFileTestClass = (FeatureFileTestClass)testClass;
-            var gherkinDocument = SpecFlowParserHelper.ParseSpecFlowDocument(featureFileTestClass.FeatureFilePath);
+            var featureTestClass = (SpecFlowFeatureTestClass)testClass;
+            var gherkinDocument = featureTestClass.GetDocument();
             if (gherkinDocument.SpecFlowFeature != null)
             {
-                featureFileTestClass.FeatureName = gherkinDocument.SpecFlowFeature.Name;
+                featureTestClass.FeatureName = gherkinDocument.SpecFlowFeature.Name;
                 var featureTags = gherkinDocument.SpecFlowFeature.Tags.GetTags().ToArray();
                 foreach (var scenarioDefinition in gherkinDocument.SpecFlowFeature.ScenarioDefinitions.Where(sd => !(sd is Background)))
                 {
                     var scenario = scenarioDefinition as Scenario;
                     if (scenario != null)
                     {
-                        var scenarioTestCase = new ScenarioTestCase(featureFileTestClass, scenario, featureTags);
+                        var scenarioTestCase = new ScenarioTestCase(featureTestClass, scenario, featureTags);
                         if (!messageBus.QueueMessage(new TestCaseDiscoveryMessage(scenarioTestCase)))
                             return false;
                     }
@@ -45,7 +44,7 @@ namespace SpecFlow.xUnitAdapter.SpecFlowPlugin.Framework
                             foreach (var exampleRow in example.TableBody)
                             {
                                 var parameters = SpecFlowParserHelper.GetScenarioOutlineParameters(example, exampleRow);
-                                var scenarioOutlineTestCase = new ScenarioTestCase(featureFileTestClass, scenarioOutline, featureTags, parameters, SpecFlowParserHelper.GetExampleRowId(scenarioOutline, exampleRow), exampleRow.Location);
+                                var scenarioOutlineTestCase = new ScenarioTestCase(featureTestClass, scenarioOutline, featureTags, parameters, SpecFlowParserHelper.GetExampleRowId(scenarioOutline, exampleRow), exampleRow.Location);
                                 if (!messageBus.QueueMessage(new TestCaseDiscoveryMessage(scenarioOutlineTestCase)))
                                     return false;
                             }

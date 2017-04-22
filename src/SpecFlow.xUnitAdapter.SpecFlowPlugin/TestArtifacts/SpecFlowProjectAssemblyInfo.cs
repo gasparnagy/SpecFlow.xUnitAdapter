@@ -38,6 +38,14 @@ namespace SpecFlow.xUnitAdapter.SpecFlowPlugin.TestArtifacts
 
         public IEnumerable<ITypeInfo> GetTypes(bool includePrivateTypes)
         {
+            Console.WriteLine($"    Discovering feature files embedded in assembly {this.originalAssemblyInfo.Name}");
+            var assembly = Assembly.ReflectionOnlyLoadFrom(this.originalAssemblyInfo.AssemblyPath);
+            foreach (var resourceName in assembly.GetManifestResourceNames().Where(x => x.EndsWith(".feature")))
+            {
+                Console.WriteLine($"      {resourceName}");
+                yield return new EmbeddedFeatureFileTestClass(this, resourceName);
+            }
+
             Console.WriteLine($"    Discovering feature files from folder {FeatureFilesFolder}");
             foreach (var featureFilePath in Directory.GetFiles(FeatureFilesFolder, "*.feature", SearchOption.AllDirectories))
             {

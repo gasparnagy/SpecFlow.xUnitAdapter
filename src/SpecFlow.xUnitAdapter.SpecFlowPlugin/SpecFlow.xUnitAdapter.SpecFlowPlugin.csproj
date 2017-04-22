@@ -76,6 +76,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="TestArtifacts\SpecFlowFeatureTestClass.cs" />
+    <Compile Include="TestArtifacts\EmbeddedFeatureFileTestClass.cs" />
     <Compile Include="TestArtifacts\FeatureFileTestClass.cs" />
     <Compile Include="Runners\ScenarioTestCaseRunner.cs" />
     <Compile Include="TestArtifacts\SpecFlowGenericFixtureType.cs" />
