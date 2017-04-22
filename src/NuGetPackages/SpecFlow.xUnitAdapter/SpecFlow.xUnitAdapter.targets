@@ -11,8 +11,8 @@
   <!--
   Executes AppendSpecFlowSourceMap for embedded and non-embedded SpecFlowFeature files.
   
-  - Embedded files are coppied to the obj\SpecFlow directory and added to the EmbeddedResource item group
-  - Non-embedded files are coppied directly to the target directory
+  - Embedded files are copied to the obj\SpecFlow directory and added to the EmbeddedResource item group
+  - Non-embedded files are copied directly to the target directory
   -->
   <Target Name="SpecFlowFeatureSourceMapping" BeforeTargets="BeforeBuild">
     <AppendSpecFlowSourceMap Files="@(SpecFlowFeature)" OutputDirectory="$(TargetDir)">
