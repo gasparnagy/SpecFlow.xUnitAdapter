@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using TechTalk.SpecFlow.Parser;
@@ -15,7 +16,7 @@ namespace SpecFlow.xUnitAdapter.SpecFlowPlugin.TestArtifacts
         public string RelativePath { get; private set; }
         public SpecFlowProjectAssemblyInfo SpecFlowProject { get; private set; }
 
-        public abstract string FeatureFilePath { get; }
+        public virtual string FeatureFilePath { get; protected set; }
 
         IAssemblyInfo ITypeInfo.Assembly => SpecFlowProject;
         string ITypeInfo.Name => (FeatureName ?? RelativePath).Replace(".", "");
@@ -65,5 +66,23 @@ namespace SpecFlow.xUnitAdapter.SpecFlowPlugin.TestArtifacts
         public abstract SpecFlowDocument GetDocument();
 
         public abstract Task<SpecFlowDocument> GetDocumentAsync();
+        
+        protected string GetSourceMapping(string content)
+        {
+            const string Pattern = "#sourceMapping=";
+
+            var index = content.IndexOf(Pattern);
+            if (index == -1)
+            {
+                Console.WriteLine($"Could not find a source mapping for {this.RelativePath}");
+                return Path.Combine(SpecFlowProject.FeatureFilesFolder, RelativePath);
+            }
+
+            var newLineIndex = content.IndexOf(Environment.NewLine, index);
+
+            return newLineIndex == -1
+                ? content.Substring(index + Pattern.Length - 1)
+                : content.Substring(index + Pattern.Length, newLineIndex - index - Pattern.Length);
+        }
     }
 }

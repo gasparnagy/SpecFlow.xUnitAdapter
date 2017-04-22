@@ -16,15 +16,18 @@ namespace SpecFlow.xUnitAdapter.SpecFlowPlugin.TestArtifacts
         {
         }
 
-        public override string FeatureFilePath => Path.Combine(SpecFlowProject.FeatureFilesFolder, RelativePath);
+        //public override string FeatureFilePath => Path.Combine(SpecFlowProject.FeatureFilesFolder, RelativePath);
 
         public override SpecFlowDocument GetDocument()
         {
             var parser = SpecFlowParserHelper.CreateParser();
+            var path = Path.Combine(SpecFlowProject.FeatureFilesFolder, RelativePath);
 
-            using (var stream = File.OpenText(this.FeatureFilePath))
+            using (var stream = File.OpenText(path))
             {
                 var content = stream.ReadToEnd();
+                
+                this.FeatureFilePath = this.GetSourceMapping(content);
 
                 return parser.Parse(new StringReader(content), this.FeatureFilePath);
             }
@@ -33,10 +36,13 @@ namespace SpecFlow.xUnitAdapter.SpecFlowPlugin.TestArtifacts
         public override async Task<SpecFlowDocument> GetDocumentAsync()
         {
             var parser = SpecFlowParserHelper.CreateParser();
+            var path = Path.Combine(SpecFlowProject.FeatureFilesFolder, RelativePath);
 
-            using (var stream = File.OpenText(this.FeatureFilePath))
+            using (var stream = File.OpenText(path))
             {
                 var content = await stream.ReadToEndAsync();
+
+                this.FeatureFilePath = this.GetSourceMapping(content);
 
                 return parser.Parse(new StringReader(content), this.FeatureFilePath);
             }

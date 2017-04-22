@@ -17,8 +17,6 @@ namespace SpecFlow.xUnitAdapter.SpecFlowPlugin.TestArtifacts
         {
         }
 
-        public override string FeatureFilePath => Path.Combine(SpecFlowProject.FeatureFilesFolder, RelativePath);
-
         public override SpecFlowDocument GetDocument()
         {
             var parser = SpecFlowParserHelper.CreateParser();
@@ -29,6 +27,8 @@ namespace SpecFlow.xUnitAdapter.SpecFlowPlugin.TestArtifacts
             using (var reader = new StreamReader(stream))
             {
                 var content = reader.ReadToEnd();
+
+                this.FeatureFilePath = this.GetSourceMapping(content);
 
                 return parser.Parse(new StringReader(content), this.RelativePath);
             }
