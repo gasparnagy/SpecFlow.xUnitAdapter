@@ -81,7 +81,7 @@ namespace SpecFlow.xUnitAdapter.SpecFlowPlugin.TestArtifacts
             var newLineIndex = content.IndexOf(Environment.NewLine, index);
 
             return newLineIndex == -1
-                ? content.Substring(index + Pattern.Length - 1)
+                ? content.Substring(index + Pattern.Length)
                 : content.Substring(index + Pattern.Length, newLineIndex - index - Pattern.Length);
         }
     }
