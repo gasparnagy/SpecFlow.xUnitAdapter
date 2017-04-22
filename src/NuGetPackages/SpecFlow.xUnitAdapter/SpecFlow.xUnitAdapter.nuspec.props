@@ -19,6 +19,10 @@
       <targetFolder>SpecFlow.xUnitAdapter\content</targetFolder>
     </additionalFiles>
 
+    <additionalFiles Include="$(MSBuildThisFileDirectory)\SpecFlow.xUnitAdapter.Config.cs">
+      <targetFolder>SpecFlow.xUnitAdapter\build</targetFolder>
+    </additionalFiles>
+
     <additionalFiles Include="$(MSBuildThisFileDirectory)\readme.txt">
       <targetFolder>SpecFlow.xUnitAdapter</targetFolder>
     </additionalFiles>

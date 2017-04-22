@@ -45,6 +45,7 @@
     </None>
     <None Include="Properties\MSBNuget.props" />
     <None Include="SpecFlow.xUnitAdapter\SpecFlow.xUnitAdapter.nuspec" />
+    <None Include="SpecFlow.xUnitAdapter\SpecFlow.xUnitAdapter.targets" />
     <None Include="SpecFlow.xUnitAdapter\SpecFlow.xUnitAdapter.nuspec.props" />
   </ItemGroup>
   <ItemGroup>
