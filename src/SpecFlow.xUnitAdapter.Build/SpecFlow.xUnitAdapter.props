@@ -4,9 +4,5 @@
 		<AvailableItemName Include="SpecFlowEmbeddedFeature" />
 	</ItemGroup>
 
-	<PropertyGroup>
-		<SpecFlowIntermediateOutputPath>$([System.IO.Path]::Combine('$(ProjectDir)','$(IntermediateOutputPath)SpecFlow'))</SpecFlowIntermediateOutputPath>
-	</PropertyGroup>
-
-	<UsingTask TaskName="SpecFlow.xUnitAdapter.Build.SpecFlowSourceMapAppender" TaskFactory="AssemblyTaskFactory" AssemblyFile="SpecFlow.xUnitAdapter.Build.dll" />
+	<UsingTask TaskName="SpecFlow.xUnitAdapter.Build.SpecFlowSourceMapAppender" AssemblyFile="SpecFlow.xUnitAdapter.Build.dll" />
 </Project>

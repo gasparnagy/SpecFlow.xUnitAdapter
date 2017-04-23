@@ -6,6 +6,10 @@
     - Non-embedded files are copied directly to the target directory
     -->
     <Target Name="SpecFlowFeatureSourceMapping" BeforeTargets="BeforeBuild">
+        <PropertyGroup>
+            <SpecFlowIntermediateOutputPath>$([System.IO.Path]::Combine('$(ProjectDir)','$(IntermediateOutputPath)SpecFlow'))</SpecFlowIntermediateOutputPath>
+        </PropertyGroup>
+        
         <SpecFlowSourceMapAppender FeatureFiles="@(SpecFlowFeature)" OutputDirectory="$(TargetDir)">
             <Output TaskParameter="SourceMappedFiles" PropertyName="_SpecFlowFeatureWithSourceMaps"/>
         </SpecFlowSourceMapAppender>
