@@ -75,7 +75,7 @@ namespace SpecFlow.xUnitAdapter.Build
             File.AppendAllLines(outputPath, new[]
             {
                 Environment.NewLine,
-                this.sourceMapper.GenerateSourceMap(outputPath)
+                this.sourceMapper.GenerateSourceMap(inputPath)
             });
 
             return new TaskItem(outputPath);
