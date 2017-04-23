@@ -1,0 +1,29 @@
+﻿<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" >
+    <!--
+    Executes AppendSpecFlowSourceMap for embedded and non-embedded SpecFlowFeature files.
+  
+    - Embedded files are copied to the obj\SpecFlow directory and added to the EmbeddedResource item group
+    - Non-embedded files are copied directly to the target directory
+    -->
+    <Target Name="SpecFlowFeatureSourceMapping" BeforeTargets="BeforeBuild">
+        <SpecFlowSourceMapAppender FeatureFiles="@(SpecFlowFeature)" OutputDirectory="$(TargetDir)">
+            <Output TaskParameter="SourceMappedFiles" PropertyName="_SpecFlowFeatureWithSourceMaps"/>
+        </SpecFlowSourceMapAppender>
+
+        <SpecFlowSourceMapAppender FeatureFiles="@(SpecFlowEmbeddedFeature)" OutputDirectory="$(SpecFlowIntermediateOutputPath)">
+            <Output TaskParameter="SourceMappedFiles" PropertyName="_SpecFlowEmbeddedFeatureWithSourceMaps"/>
+        </SpecFlowSourceMapAppender>
+
+        <ItemGroup>
+            <EmbeddedResource Include="$(_SpecFlowEmbeddedFeatureWithSourceMaps)">
+                <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+            </EmbeddedResource>
+        </ItemGroup>
+
+        <!-- Append to FileWrites so the file will be removed on clean -->
+        <ItemGroup>
+            <FileWrites Include="@(_SpecFlowFeatureWithSourceMaps)"/>
+            <FileWrites Include="@(_SpecFlowEmbeddedFeatureWithSourceMaps)"/>
+        </ItemGroup>
+    </Target>
+</Project>

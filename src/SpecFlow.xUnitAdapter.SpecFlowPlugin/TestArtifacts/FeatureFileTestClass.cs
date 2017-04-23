@@ -26,8 +26,9 @@ namespace SpecFlow.xUnitAdapter.SpecFlowPlugin.TestArtifacts
             using (var stream = File.OpenText(path))
             {
                 var content = stream.ReadToEnd();
-                
-                this.FeatureFilePath = this.GetSourceMapping(content);
+                var sourceMap = this.SpecFlowSourceMapper.ReadSourceMap(content);
+
+                this.FeatureFilePath = sourceMap.SourcePath;
 
                 return parser.Parse(new StringReader(content), this.FeatureFilePath);
             }
@@ -41,8 +42,9 @@ namespace SpecFlow.xUnitAdapter.SpecFlowPlugin.TestArtifacts
             using (var stream = File.OpenText(path))
             {
                 var content = await stream.ReadToEndAsync();
+                var sourceMap = this.SpecFlowSourceMapper.ReadSourceMap(content);
 
-                this.FeatureFilePath = this.GetSourceMapping(content);
+                this.FeatureFilePath = sourceMap.SourcePath;
 
                 return parser.Parse(new StringReader(content), this.FeatureFilePath);
             }

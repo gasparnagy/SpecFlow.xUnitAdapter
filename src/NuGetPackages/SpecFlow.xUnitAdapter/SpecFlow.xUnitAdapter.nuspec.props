@@ -19,12 +19,12 @@
       <targetFolder>SpecFlow.xUnitAdapter\content</targetFolder>
     </additionalFiles>
 
-    <additionalFiles Include="$(MSBuildThisFileDirectory)\SpecFlow.xUnitAdapter.targets">
-      <targetFolder>SpecFlow.xUnitAdapter\build</targetFolder>
-    </additionalFiles>
-
     <additionalFiles Include="$(MSBuildThisFileDirectory)\readme.txt">
       <targetFolder>SpecFlow.xUnitAdapter</targetFolder>
+    </additionalFiles>
+
+    <additionalFiles Include="$(MSBuildThisFileDirectory)\..\..\SpecFlow.xUnitAdapter.Build\bin\$(Configuration)\*">
+      <targetFolder>SpecFlow.xUnitAdapter\build\net45</targetFolder>
     </additionalFiles>
   </ItemGroup>
 </Project>

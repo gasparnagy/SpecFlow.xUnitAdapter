@@ -1,0 +1,12 @@
+﻿<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" >
+	<ItemGroup>
+		<AvailableItemName Include="SpecFlowFeature" />
+		<AvailableItemName Include="SpecFlowEmbeddedFeature" />
+	</ItemGroup>
+
+	<PropertyGroup>
+		<SpecFlowIntermediateOutputPath>$([System.IO.Path]::Combine('$(ProjectDir)','$(IntermediateOutputPath)SpecFlow'))</SpecFlowIntermediateOutputPath>
+	</PropertyGroup>
+
+	<UsingTask TaskName="SpecFlow.xUnitAdapter.Build.SpecFlowSourceMapAppender" TaskFactory="AssemblyTaskFactory" AssemblyFile="SpecFlow.xUnitAdapter.Build.dll" />
+</Project>

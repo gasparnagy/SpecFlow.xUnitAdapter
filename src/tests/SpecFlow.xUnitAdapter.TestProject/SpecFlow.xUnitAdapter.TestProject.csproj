@@ -3,6 +3,7 @@
   <Import Project="..\..\packages\xunit.runner.visualstudio.2.2.0\build\net20\xunit.runner.visualstudio.props" Condition="Exists('..\..\packages\xunit.runner.visualstudio.2.2.0\build\net20\xunit.runner.visualstudio.props')" />
   <Import Project="..\packages\xunit.runner.visualstudio.2.1.0\build\net20\xunit.runner.visualstudio.props" Condition="Exists('..\packages\xunit.runner.visualstudio.2.1.0\build\net20\xunit.runner.visualstudio.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <Import Project="..\..\SpecFlow.xUnitAdapter.Build\bin\$(Configuration)\SpecFlow.xUnitAdapter.props" Condition="Exists('..\..\SpecFlow.xUnitAdapter.Build\bin\$(Configuration)\SpecFlow.xUnitAdapter.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -32,6 +33,11 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <!--
+    Prevents Visual Studio's instance of MSBuild from locking SpecFlow.xUnitAdapter.Build.dll.
+    This is only needed because we are building that dll in the same project we are using it.
+    -->
+    <GenerateResourceNeverLockTypeAssemblies>true</GenerateResourceNeverLockTypeAssemblies>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -90,7 +96,7 @@
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="..\..\NuGetPackages\SpecFlow.xUnitAdapter\SpecFlow.xUnitAdapter.targets" Condition="Exists('..\..\NuGetPackages\SpecFlow.xUnitAdapter\SpecFlow.xUnitAdapter.targets')" />
+  <Import Project="..\..\SpecFlow.xUnitAdapter.Build\bin\$(Configuration)\SpecFlow.xUnitAdapter.targets" Condition="Exists('..\..\SpecFlow.xUnitAdapter.Build\bin\$(Configuration)\SpecFlow.xUnitAdapter.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>

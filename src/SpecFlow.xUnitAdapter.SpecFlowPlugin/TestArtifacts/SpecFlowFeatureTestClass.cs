@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using TechTalk.SpecFlow.Parser;
@@ -49,6 +48,8 @@ namespace SpecFlow.xUnitAdapter.SpecFlowPlugin.TestArtifacts
             TestCollection = new TestCollection(new TestAssembly(specFlowProject, null), null, "Default Collection"); //TODO: support test collections for parallelization
         }
 
+        protected ISpecFlowSourceMapper SpecFlowSourceMapper { get; } = new SpecFlowSourceMapperV1();
+
         public virtual void Deserialize(IXunitSerializationInfo data)
         {
             SpecFlowProject = data.GetValue<SpecFlowProjectAssemblyInfo>("SpecFlowProject");
@@ -66,23 +67,5 @@ namespace SpecFlow.xUnitAdapter.SpecFlowPlugin.TestArtifacts
         public abstract SpecFlowDocument GetDocument();
 
         public abstract Task<SpecFlowDocument> GetDocumentAsync();
-        
-        protected string GetSourceMapping(string content)
-        {
-            const string Pattern = "#sourceMapping=";
-
-            var index = content.IndexOf(Pattern);
-            if (index == -1)
-            {
-                Console.WriteLine($"Could not find a source mapping for {this.RelativePath}");
-                return Path.Combine(SpecFlowProject.FeatureFilesFolder, RelativePath);
-            }
-
-            var newLineIndex = content.IndexOf(Environment.NewLine, index);
-
-            return newLineIndex == -1
-                ? content.Substring(index + Pattern.Length)
-                : content.Substring(index + Pattern.Length, newLineIndex - index - Pattern.Length);
-        }
     }
 }

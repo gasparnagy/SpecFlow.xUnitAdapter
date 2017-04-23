@@ -4,13 +4,24 @@ root = true
 # Global settings
 [*]
 indent_style = space
-indent_size = 2
 end_of_line = crlf
 insert_final_newline = true
 trim_trailing_whitespace = true
 
 [*.cs]
 indent_size = 4
+
+[*.{config,xml}]
+indent_size = 2
+
+[*.{proj,props,sln,targets}]
+tab_width = 4
+
+[*.{csproj,json,ps1,psd1,psm1,resx,rst}]
+indent_size = 2
+
+[nuget.config]
+indent_size = 2
 
 
 # Advanced
