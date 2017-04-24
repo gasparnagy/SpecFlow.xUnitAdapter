@@ -27,7 +27,8 @@ namespace SpecFlow.xUnitAdapter.SpecFlowPlugin
 
         public static SpecFlowDocument ParseSpecFlowDocument(string featureFilePath)
         {
-            using (var reader = new StreamReader(featureFilePath))
+            using (var stream = new FileStream(featureFilePath, FileMode.Open))
+            using (var reader = new StreamReader(stream))
             {
                 var parser = CreateParser();
                 var gherkinDocument = parser.Parse(reader, featureFilePath);

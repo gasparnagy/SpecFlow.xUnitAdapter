@@ -9,8 +9,8 @@ namespace SpecFlow.xUnitAdapter.SpecFlowPlugin.Framework
 {
     public class SpecFlowTestDiscoverer : TestFrameworkDiscoverer
     {
-        public SpecFlowTestDiscoverer(IAssemblyInfo assemblyInfo, ISourceInformationProvider sourceProvider, IMessageSink diagnosticMessageSink) : 
-            base(new SpecFlowProjectAssemblyInfo(assemblyInfo), sourceProvider, diagnosticMessageSink)
+        public SpecFlowTestDiscoverer(IAssemblyInfo assemblyInfo, string featureFilesFolder, ISourceInformationProvider sourceProvider, IMessageSink diagnosticMessageSink) : 
+            base(new SpecFlowProjectAssemblyInfo(assemblyInfo, featureFilesFolder), sourceProvider, diagnosticMessageSink)
         {
         }
 
