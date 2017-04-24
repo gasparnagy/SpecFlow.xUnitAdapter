@@ -37,3 +37,5 @@ build:
 
 artifacts:
 - path: 'src\NuGetPackages\bin\*.nupkg'
+
+test: off
