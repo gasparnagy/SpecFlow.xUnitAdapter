@@ -1,0 +1,41 @@
+version: build{build}
+
+branches:
+  only:
+  - master
+
+environment:
+  BaseVersion: 1.0.0
+  NugetVersion: "1.0.0-ci$(APPVEYOR_BUILD_NUMBER)"
+  
+cache:
+  - src\packages -> src\**\packages.config
+
+assembly_info:
+  patch: true
+  file: 'src\**\AssemblyInfo.*'
+  assembly_version: "$(BaseVersion)"
+  assembly_file_version: "$(BaseVersion)"
+  assembly_informational_version: "$(NugetVersion)"
+
+nuget:
+  project_feed: true
+  disable_publish_on_pr: true
+
+configuration: Release
+
+before_build:
+  - cd src
+  - appveyor DownloadFile https://dist.nuget.org/win-x86-commandline/latest/nuget.exe
+  - appveyor DownloadFile https://raw.githubusercontent.com/appveyor/ci/master/scripts/nuget-restore.cmd
+  - nuget-restore
+  - cd ..
+
+build:
+  project: src\SpecFlow.xUnitAdapter.sln
+  verbosity: normal
+
+artifacts:
+- path: 'src\NuGetPackages\bin\*.nupkg'
+
+test: off

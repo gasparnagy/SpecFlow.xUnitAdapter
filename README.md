@@ -11,7 +11,13 @@ License: Apache (https://github.com/gasparnagy/SpecFlow.xUnitAdapter/blob/master
 
 NuGet: https://www.nuget.org/packages/SpecFlow.xUnitAdapter
 
-Check the complete example at https://github.com/gasparnagy/SpecFlow.xUnitAdapter/tree/master/sample/MyCalculator.
+See my blog post (http://gasparnagy.com/2017/04/specflow-without-code-behind-files/) for more information and background, 
+you can also look at the complete example at https://github.com/gasparnagy/SpecFlow.xUnitAdapter/tree/master/sample/MyCalculator or watch the 
+video demo on [YouTube](https://youtu.be/wGuoVqG3I8M).
+
+[![Build status](https://ci.appveyor.com/api/projects/status/oshtcr06501euoih/branch/master?svg=true)](https://ci.appveyor.com/project/gasparnagy/specflow-xunitadapter/branch/master)
+
+## Donate
 
 If you like this plugin and would like to support developing this or similar plugins, please consider donating the project. (For receiving an invoice for your donation, please [contact me](http://gasparnagy.com/about/) upfront.)
 
