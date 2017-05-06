@@ -12,7 +12,8 @@ namespace SpecFlow.xUnitAdapter.SpecFlowPlugin.TestArtifacts
     [Serializable]
     public class SpecFlowProjectAssemblyInfo : LongLivedMarshalByRefObject, IAssemblyInfo, IXunitSerializable
     {
-        public string FeatureFilesFolder { get; }
+        public string FeatureFilesFolder { get; private set; }
+
         private IAssemblyInfo originalAssemblyInfo;
 
         public SpecFlowProjectAssemblyInfo()
@@ -63,6 +64,8 @@ namespace SpecFlow.xUnitAdapter.SpecFlowPlugin.TestArtifacts
             //originalAssemblyInfo = Reflector.Wrap(Assembly.LoadFrom(assemblyName));
             originalAssemblyInfo = Reflector.Wrap(Assembly.Load(new AssemblyName(assemblyName)));
 
+            this.FeatureFilesFolder = data.GetValue<string>("FeatureFilesFolder");
+
             //var an = new AssemblyName(assemblyName);
             //var assembly = Assembly.Load(new AssemblyName { Name = an.Name, Version = an.Version });
             //originalAssemblyInfo = Reflector.Wrap(assembly);
@@ -71,7 +74,8 @@ namespace SpecFlow.xUnitAdapter.SpecFlowPlugin.TestArtifacts
 
         public void Serialize(IXunitSerializationInfo data)
         {
-            data.AddValue("OrigAssembly", Name);
+            data.AddValue("OrigAssembly", this.Name);
+            data.AddValue("FeatureFilesFolder", this.FeatureFilesFolder);
         }
     }
 }
