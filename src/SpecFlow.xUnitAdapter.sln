@@ -12,7 +12,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		..\LICENSE = ..\LICENSE
 		nuget.config = nuget.config
 		..\README.md = ..\README.md
-		SpecFlow.xUnitAdapter.2015.ChildProcessDbgSettings = SpecFlow.xUnitAdapter.2015.ChildProcessDbgSettings
+		SpecFlow.xUnitAdapter.ChildProcessDbgSettings = SpecFlow.xUnitAdapter.ChildProcessDbgSettings
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpecFlow.xUnitAdapter.SpecFlowPlugin.Core", "SpecFlow.xUnitAdapter.SpecFlowPlugin\SpecFlow.xUnitAdapter.SpecFlowPlugin.Core.csproj", "{53C7CB4D-42FC-410D-A1B1-43147926E7C0}"
