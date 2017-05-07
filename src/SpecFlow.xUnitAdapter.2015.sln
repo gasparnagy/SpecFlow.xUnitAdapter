@@ -19,6 +19,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		..\LICENSE = ..\LICENSE
 		.nuget\nuget.config = .nuget\nuget.config
 		..\README.md = ..\README.md
+		SpecFlow.xUnitAdapter.2015.ChildProcessDbgSettings = SpecFlow.xUnitAdapter.2015.ChildProcessDbgSettings
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpecFlow.xUnitAdapter.Build", "SpecFlow.xUnitAdapter.Build\SpecFlow.xUnitAdapter.Build.csproj", "{0C35DF24-9662-4061-BAE7-8672E1CFBFB2}"
