@@ -19,9 +19,7 @@ copy /Y %ASSEMBLYINFO% %ASSEMBLYINFO%.bak
 powershell -Command "(gc '%ASSEMBLYINFO%') -replace '1.0.0-localdev', '%PKGVER%' | Out-File '%ASSEMBLYINFO%'"
 powershell -Command "(gc '%ASSEMBLYINFO%') -replace '1.0.0.0', '%VERSION%.0' | Out-File '%ASSEMBLYINFO%'"
 
-@pause
-
-msbuild SpecFlow.xUnitAdapter.sln %CONFIG%
+msbuild SpecFlow.xUnitAdapter.2017.sln %CONFIG%
 
 cd NuGetPackages
 
