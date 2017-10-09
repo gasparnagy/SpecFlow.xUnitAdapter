@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using TechTalk.SpecFlow;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace SpecFlow.xUnitAdapter.TestProject
 {
     [Binding]
-    public sealed class StepDefinitions
+    public sealed class StepDefinitions : Steps
     {
         private List<int> numbers = new List<int>();
         private int? result;
@@ -21,6 +22,8 @@ namespace SpecFlow.xUnitAdapter.TestProject
         [Given("I have entered (.*) into the calculator")]
         public void GivenIHaveEnteredSomethingIntoTheCalculator(int number)
         {
+            var outputHelper = ScenarioContext.ScenarioContainer.Resolve<ITestOutputHelper>();
+            outputHelper.WriteLine("Sample output through ITestOutputHelper");
             Console.WriteLine("Running Given step");
             numbers.Add(number);
         }

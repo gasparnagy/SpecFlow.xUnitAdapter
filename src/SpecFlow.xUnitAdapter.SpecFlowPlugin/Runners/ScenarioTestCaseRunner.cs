@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
@@ -10,6 +11,7 @@ using Gherkin.Ast;
 using SpecFlow.xUnitAdapter.SpecFlowPlugin.TestArtifacts;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Parser;
+using Xunit.Abstractions;
 using Xunit.Sdk;
 
 namespace SpecFlow.xUnitAdapter.SpecFlowPlugin.Runners
@@ -17,9 +19,11 @@ namespace SpecFlow.xUnitAdapter.SpecFlowPlugin.Runners
     public class ScenarioTestCaseRunner : TestCaseRunner<ScenarioTestCase>
     {
         private ITestRunner testRunner;
+        private readonly TestOutputHelper testOutputHelper;
 
-        public ScenarioTestCaseRunner(ScenarioTestCase testCase, IMessageBus messageBus, ExceptionAggregator aggregator, CancellationTokenSource cancellationTokenSource) : base(testCase, messageBus, aggregator, cancellationTokenSource)
+        public ScenarioTestCaseRunner(ScenarioTestCase testCase, IMessageBus messageBus, ExceptionAggregator aggregator, CancellationTokenSource cancellationTokenSource, TestOutputHelper testOutputHelper) : base(testCase, messageBus, aggregator, cancellationTokenSource)
         {
+            this.testOutputHelper = testOutputHelper;
         }
 
         public void FeatureSetup(GherkinDocument gherkinDocument)
@@ -57,7 +61,11 @@ namespace SpecFlow.xUnitAdapter.SpecFlowPlugin.Runners
 
         public virtual void ScenarioSetup(ScenarioInfo scenarioInfo)
         {
+            if (testOutputHelper == null)
+                throw new SpecFlowException("SpecFlow.xUnitAdapter: Unable to find ITestOutputHelper");
+
             testRunner.OnScenarioStart(scenarioInfo);
+            testRunner.ScenarioContext.ScenarioContainer.RegisterInstanceAs<ITestOutputHelper>(testOutputHelper);
         }
 
         public virtual void ScenarioCleanup()
@@ -114,7 +122,20 @@ namespace SpecFlow.xUnitAdapter.SpecFlowPlugin.Runners
                 var aggregator = new ExceptionAggregator(Aggregator);
                 if (!aggregator.HasExceptions)
                 {
-                    aggregator.Run(() => RunScenario(gherkinDocument, scenario, output));
+                    aggregator.Run(() =>
+                        {
+                            testOutputHelper.Initialize(MessageBus, test);
+                            try
+                            {
+                                RunScenario(gherkinDocument, scenario, output);
+                            }
+                            finally
+                            {
+                                output.Append(testOutputHelper.Output);
+                                testOutputHelper.Uninitialize();
+                            }
+                        }
+                    );
                 }
 
                 var exception = aggregator.ToException();

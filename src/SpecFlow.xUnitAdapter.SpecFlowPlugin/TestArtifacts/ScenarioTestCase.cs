@@ -87,7 +87,10 @@ namespace SpecFlow.xUnitAdapter.SpecFlowPlugin.TestArtifacts
                                                  object[] constructorArguments,
                                                  ExceptionAggregator aggregator,
                                                  CancellationTokenSource cancellationTokenSource)
-            => new ScenarioTestCaseRunner(this, messageBus, aggregator, cancellationTokenSource).RunAsync();
+        {
+            var testOutputHelper = constructorArguments.OfType<TestOutputHelper>().FirstOrDefault();
+            return new ScenarioTestCaseRunner(this, messageBus, aggregator, cancellationTokenSource, testOutputHelper).RunAsync();
+        }
 
         #region IMethodInfo default implementation
         bool IMethodInfo.IsAbstract => false;
