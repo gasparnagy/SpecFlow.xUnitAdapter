@@ -52,12 +52,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\SpecFlow.xUnitAdapter.SpecFlowPlugin\TestArtifacts\SpecFlowSourceMap.cs">
+      <Link>SpecFlowSourceMap.cs</Link>
+    </Compile>
+    <Compile Include="..\SpecFlow.xUnitAdapter.SpecFlowPlugin\TestArtifacts\SpecFlowSourceMapper.cs">
+      <Link>SpecFlowSourceMapper.cs</Link>
+    </Compile>
     <Compile Include="SpecFlowSourceMapAppender.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
     <Content Include="SpecFlow.xUnitAdapter.props">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -66,12 +74,6 @@
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\SpecFlow.xUnitAdapter.SpecFlowPlugin\SpecFlow.xUnitAdapter.SpecFlowPlugin.csproj">
-      <Project>{1dd1877b-e008-4383-ae65-69a55264c5ba}</Project>
-      <Name>SpecFlow.xUnitAdapter.SpecFlowPlugin</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
