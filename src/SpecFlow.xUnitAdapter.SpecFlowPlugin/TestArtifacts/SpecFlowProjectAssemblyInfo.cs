@@ -53,6 +53,10 @@ namespace SpecFlow.xUnitAdapter.SpecFlowPlugin.TestArtifacts
                 Console.WriteLine($"      {relativePath}");
                 yield return new FeatureFileTestClass(this, relativePath);
             }
+
+            // discovering "standard" xunit tests to allow incremental transition from the generated style to the new style
+            foreach (var standardType in originalAssemblyInfo.GetTypes(includePrivateTypes))
+                yield return standardType;
         }
 
         public string AssemblyPath

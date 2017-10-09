@@ -6,21 +6,31 @@ using Xunit.Sdk;
 
 namespace SpecFlow.xUnitAdapter.SpecFlowPlugin.Framework
 {
-    public class SpecFlowTestDiscoverer : TestFrameworkDiscoverer
+    public class SpecFlowTestDiscoverer : XunitTestFrameworkDiscoverer
     {
         public SpecFlowTestDiscoverer(IAssemblyInfo assemblyInfo, ISourceInformationProvider sourceProvider, IMessageSink diagnosticMessageSink) : 
             base(new SpecFlowProjectAssemblyInfo(assemblyInfo), sourceProvider, diagnosticMessageSink)
         {
         }
 
+        private bool IsSpecFlowTest(object test)
+        {
+            return test is SpecFlowFeatureTestClass;
+        }
+
         protected override ITestClass CreateTestClass(ITypeInfo typeInfo)
         {
-            return (ITestClass)typeInfo;
+            if (IsSpecFlowTest(typeInfo))
+                return (ITestClass)typeInfo;
+            return base.CreateTestClass(typeInfo);
         }
 
         protected override bool FindTestsForType(ITestClass testClass, bool includeSourceInformation, IMessageBus messageBus,
             ITestFrameworkDiscoveryOptions discoveryOptions)
         {
+            if (!IsSpecFlowTest(testClass))
+                return base.FindTestsForType(testClass, includeSourceInformation, messageBus, discoveryOptions);
+
             var featureTestClass = (SpecFlowFeatureTestClass)testClass;
             var gherkinDocument = featureTestClass.GetDocument();
             if (gherkinDocument.SpecFlowFeature != null)
