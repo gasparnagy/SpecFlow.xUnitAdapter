@@ -6,6 +6,9 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpecFlow.xUnitAdapter.SpecFlowPlugin", "SpecFlow.xUnitAdapter.SpecFlowPlugin\SpecFlow.xUnitAdapter.SpecFlowPlugin.csproj", "{1DD1877B-E008-4383-AE65-69A55264C5BA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpecFlow.xUnitAdapter.TestProject", "tests\SpecFlow.xUnitAdapter.TestProject\SpecFlow.xUnitAdapter.TestProject.csproj", "{23B6FA2E-CFB0-4D32-A40D-D29C8CC8DF45}"
+	ProjectSection(ProjectDependencies) = postProject
+		{0C35DF24-9662-4061-BAE7-8672E1CFBFB2} = {0C35DF24-9662-4061-BAE7-8672E1CFBFB2}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NuGetPackages", "NuGetPackages\NuGetPackages.csproj", "{B967FFB8-7BF4-4889-99BF-D8B4FA6A0B5A}"
 EndProject
@@ -18,6 +21,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		..\README.md = ..\README.md
 		SpecFlow.xUnitAdapter.2015.ChildProcessDbgSettings = SpecFlow.xUnitAdapter.2015.ChildProcessDbgSettings
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpecFlow.xUnitAdapter.Build", "SpecFlow.xUnitAdapter.Build\SpecFlow.xUnitAdapter.Build.csproj", "{0C35DF24-9662-4061-BAE7-8672E1CFBFB2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -37,6 +42,10 @@ Global
 		{B967FFB8-7BF4-4889-99BF-D8B4FA6A0B5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B967FFB8-7BF4-4889-99BF-D8B4FA6A0B5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B967FFB8-7BF4-4889-99BF-D8B4FA6A0B5A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0C35DF24-9662-4061-BAE7-8672E1CFBFB2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C35DF24-9662-4061-BAE7-8672E1CFBFB2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C35DF24-9662-4061-BAE7-8672E1CFBFB2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C35DF24-9662-4061-BAE7-8672E1CFBFB2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

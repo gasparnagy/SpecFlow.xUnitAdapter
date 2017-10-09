@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
@@ -73,7 +72,8 @@ namespace SpecFlow.xUnitAdapter.SpecFlowPlugin.Runners
             var summary = new RunSummary() { Total = 1 };
             var output = new StringBuilder();
 
-            var gherkinDocument = await SpecFlowParserHelper.ParseSpecFlowDocumentAsync(TestCase.FeatureFile.FeatureFilePath);
+            var gherkinDocument = await this.TestCase.FeatureFile.GetDocumentAsync();
+
 
             Scenario scenario = null;
             if (gherkinDocument.SpecFlowFeature != null)

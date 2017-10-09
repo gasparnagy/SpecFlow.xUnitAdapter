@@ -22,5 +22,9 @@
     <additionalFiles Include="$(MSBuildThisFileDirectory)\readme.txt">
       <targetFolder>SpecFlow.xUnitAdapter</targetFolder>
     </additionalFiles>
+
+    <additionalFiles Include="$(MSBuildThisFileDirectory)\..\..\SpecFlow.xUnitAdapter.Build\bin\$(Configuration)\*">
+      <targetFolder>SpecFlow.xUnitAdapter\build\net45</targetFolder>
+    </additionalFiles>
   </ItemGroup>
 </Project>

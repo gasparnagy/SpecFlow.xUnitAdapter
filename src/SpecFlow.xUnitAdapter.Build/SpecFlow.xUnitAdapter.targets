@@ -1,0 +1,32 @@
+﻿<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" >
+    <PropertyGroup>
+        <SpecFlowIntermediateOutputPath Condition=" '$(SpecFlowIntermediateOutputPath)' == '' And '$(IntermediateOutputPath)' != ''">$([System.IO.Path]::Combine('$(ProjectDir)','$(IntermediateOutputPath)', 'SpecFlow'))</SpecFlowIntermediateOutputPath>
+        <SpecFlowIntermediateOutputPath Condition=" '$(SpecFlowIntermediateOutputPath)' == '' And '$(IntermediateOutputPath)' == ''">$([System.IO.Path]::Combine('$(ProjectDir)','obj', 'SpecFlow'))</SpecFlowIntermediateOutputPath>
+    </PropertyGroup>
+    
+    <!--
+    Executes SpecFlowSourceMapAppender for embedded and non-embedded SpecFlowFeature files.
+  
+    - Embedded files are copied to the obj\SpecFlow directory and added to the EmbeddedResource item group
+    - Non-embedded files are copied directly to the target directory
+    -->
+    <Target Name="SpecFlowFeatureSourceMapping" BeforeTargets="BeforeBuild">        
+        <SpecFlowSourceMapAppender FeatureFiles="@(SpecFlowFeature)" OutputDirectory="$(TargetDir)">
+            <Output TaskParameter="SourceMappedFiles" PropertyName="_SpecFlowFeatureWithSourceMaps"/>
+        </SpecFlowSourceMapAppender>
+
+        <SpecFlowSourceMapAppender FeatureFiles="@(SpecFlowEmbeddedFeature)" OutputDirectory="$(SpecFlowIntermediateOutputPath)">
+            <Output TaskParameter="SourceMappedFiles" PropertyName="_SpecFlowEmbeddedFeatureWithSourceMaps"/>
+        </SpecFlowSourceMapAppender>
+
+        <ItemGroup>
+            <EmbeddedResource Include="$(_SpecFlowEmbeddedFeatureWithSourceMaps)">
+                <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+            </EmbeddedResource>
+        </ItemGroup>
+    </Target>
+
+    <Target Name="Clean">
+        <RemoveDir Directories="$(SpecFlowIntermediateOutputPath)" />
+    </Target>
+</Project>

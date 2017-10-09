@@ -14,7 +14,7 @@ namespace SpecFlow.xUnitAdapter.SpecFlowPlugin.TestArtifacts
 {
     public class ScenarioTestCase : LongLivedMarshalByRefObject, ITestMethod, IXunitTestCase, IReflectionMethodInfo
     {
-        public FeatureFileTestClass FeatureFile { get; private set; }
+        public SpecFlowFeatureTestClass FeatureFile { get; private set; }
         public string Name { get; private set; }
 
         public string DisplayName => GetDisplayName();
@@ -38,22 +38,22 @@ namespace SpecFlow.xUnitAdapter.SpecFlowPlugin.TestArtifacts
             Traits = new Dictionary<string, List<string>>();
         }
 
-        private ScenarioTestCase(FeatureFileTestClass featureFileTestClass, ScenarioDefinition scenario, string[] featureTags, Location location)
+        private ScenarioTestCase(SpecFlowFeatureTestClass featureTestClass, ScenarioDefinition scenario, string[] featureTags, Location location)
         {
-            FeatureFile = featureFileTestClass;
+            FeatureFile = featureTestClass;
             Name = scenario.Name;
-            SourceInformation = new SourceInformation { FileName = featureFileTestClass.FeatureFilePath, LineNumber = location?.Line };
+            SourceInformation = new SourceInformation { FileName = featureTestClass.FeatureFilePath, LineNumber = location?.Line };
             Traits = new Dictionary<string, List<string>>();
             Traits.Add("Category", featureTags.Concat(((IHasTags)scenario).Tags.GetTags()).ToList());
         }
 
-        public ScenarioTestCase(FeatureFileTestClass featureFileTestClass, Scenario scenario, string[] featureTags)
-            : this(featureFileTestClass, scenario, featureTags, scenario.Location)
+        public ScenarioTestCase(SpecFlowFeatureTestClass featureTestClass, Scenario scenario, string[] featureTags)
+            : this(featureTestClass, scenario, featureTags, scenario.Location)
         {
         }
 
-        public ScenarioTestCase(FeatureFileTestClass featureFileTestClass, ScenarioOutline scenario, string[] featureTags, Dictionary<string, string> scenarioOutlineParameters, string exampleId, Location exampleLocation) 
-            : this(featureFileTestClass, scenario, featureTags, exampleLocation)
+        public ScenarioTestCase(SpecFlowFeatureTestClass featureTestClass, ScenarioOutline scenario, string[] featureTags, Dictionary<string, string> scenarioOutlineParameters, string exampleId, Location exampleLocation) 
+            : this(featureTestClass, scenario, featureTags, exampleLocation)
         {
             ScenarioOutlineParameters = scenarioOutlineParameters;
             ExampleId = exampleId;
@@ -70,7 +70,7 @@ namespace SpecFlow.xUnitAdapter.SpecFlowPlugin.TestArtifacts
 
         public void Deserialize(IXunitSerializationInfo data)
         {
-            FeatureFile = data.GetValue<FeatureFileTestClass>("FeatureFile");
+            FeatureFile = data.GetValue<SpecFlowFeatureTestClass>("FeatureFile");
             Name = data.GetValue<string>("Name");
             ExampleId = data.GetValue<string>("ExampleId");
         }
