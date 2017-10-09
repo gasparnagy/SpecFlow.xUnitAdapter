@@ -74,6 +74,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Runners\XUnitTraceListener.cs" />
     <Compile Include="TestArtifacts\SpecFlowFeatureTestClass.cs" />
     <Compile Include="TestArtifacts\EmbeddedFeatureFileTestClass.cs" />
     <Compile Include="TestArtifacts\FeatureFileTestClass.cs" />
@@ -87,6 +88,7 @@
     <Compile Include="TestArtifacts\SpecFlowProjectAssemblyInfo.cs" />
     <Compile Include="TestArtifacts\SpecFlowSourceMap.cs" />
     <Compile Include="TestArtifacts\SpecFlowSourceMapper.cs" />
+    <Compile Include="XUnitAdapterPlugin.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

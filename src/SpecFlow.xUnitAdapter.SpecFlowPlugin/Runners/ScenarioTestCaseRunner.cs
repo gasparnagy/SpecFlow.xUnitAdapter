@@ -77,7 +77,7 @@ namespace SpecFlow.xUnitAdapter.SpecFlowPlugin.Runners
         {
             var test = new XunitTest(TestCase, TestCase.DisplayName); //TODO: this is a pickle, we could use the Compiler/Pickle interfaces from the Gherkin parser
             var summary = new RunSummary() { Total = 1 };
-            var output = new StringBuilder();
+            string output = "";
 
             var gherkinDocument = await this.TestCase.FeatureFile.GetDocumentAsync();
 
@@ -124,11 +124,11 @@ namespace SpecFlow.xUnitAdapter.SpecFlowPlugin.Runners
                             testOutputHelper.Initialize(MessageBus, test);
                             try
                             {
-                                RunScenario(gherkinDocument, scenario, output);
+                                RunScenario(gherkinDocument, scenario);
                             }
                             finally
                             {
-                                output.Append(testOutputHelper.Output);
+                                output = testOutputHelper.Output;
                                 testOutputHelper.Uninitialize();
                             }
                         }
@@ -138,10 +138,10 @@ namespace SpecFlow.xUnitAdapter.SpecFlowPlugin.Runners
                 var exception = aggregator.ToException();
                 TestResultMessage testResult;
                 if (exception == null)
-                    testResult = new TestPassed(test, summary.Time, output.ToString());
+                    testResult = new TestPassed(test, summary.Time, output);
                 else
                 {
-                    testResult = new TestFailed(test, summary.Time, output.ToString(), exception);
+                    testResult = new TestFailed(test, summary.Time, output, exception);
                     summary.Failed++;
                 }
 
@@ -150,13 +150,13 @@ namespace SpecFlow.xUnitAdapter.SpecFlowPlugin.Runners
                         CancellationTokenSource.Cancel();
             }
 
-            if (!MessageBus.QueueMessage(new TestFinished(test, summary.Time, output.ToString())))
+            if (!MessageBus.QueueMessage(new TestFinished(test, summary.Time, output)))
                 CancellationTokenSource.Cancel();
 
             return summary;
         }
 
-        private void RunScenario(SpecFlowDocument gherkinDocument, Scenario scenario, StringBuilder output)
+        private void RunScenario(SpecFlowDocument gherkinDocument, Scenario scenario)
         {
             FeatureSetup(gherkinDocument);
 
@@ -173,7 +173,7 @@ namespace SpecFlow.xUnitAdapter.SpecFlowPlugin.Runners
             {
                 foreach (var step in steps)
                 {
-                    output.AppendLine($"> Running {step.Keyword}{step.Text}");
+                    Debug.WriteLine($"> Running {step.Keyword}{step.Text}");
                     ExecuteStep(step);
                 }
 
