@@ -17,7 +17,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <tags>specflow bdd xunit</tags>
     <dependencies>
-      <dependency id="SpecFlow" version="2.1.0" />
+      <dependency id="SpecFlow.xUnit" version="2.2.1" />
       <dependency id="xunit" version="2.2.0" />
     </dependencies>
   </metadata>

@@ -26,5 +26,10 @@
     <additionalFiles Include="$(MSBuildThisFileDirectory)\..\..\SpecFlow.xUnitAdapter.Build\bin\$(Configuration)\*">
       <targetFolder>SpecFlow.xUnitAdapter\build\net45</targetFolder>
     </additionalFiles>
+
+    <additionalFiles Include="$(MSBuildThisFileDirectory)\App.config.transform">
+      <targetFolder>SpecFlow.xUnitAdapter\content</targetFolder>
+    </additionalFiles>
+
   </ItemGroup>
 </Project>
