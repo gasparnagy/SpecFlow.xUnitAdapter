@@ -121,6 +121,7 @@ namespace SpecFlow.xUnitAdapter.SpecFlowPlugin.Runners
                 {
                     aggregator.Run(() =>
                         {
+                            var stopwatch = Stopwatch.StartNew();
                             testOutputHelper.Initialize(MessageBus, test);
                             try
                             {
@@ -128,6 +129,8 @@ namespace SpecFlow.xUnitAdapter.SpecFlowPlugin.Runners
                             }
                             finally
                             {
+                                stopwatch.Stop();
+                                summary.Time = (decimal)stopwatch.Elapsed.TotalSeconds;
                                 output = testOutputHelper.Output;
                                 testOutputHelper.Uninitialize();
                             }
