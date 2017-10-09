@@ -4,7 +4,6 @@ using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Reflection;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Gherkin.Ast;
@@ -89,9 +88,7 @@ namespace SpecFlow.xUnitAdapter.SpecFlowPlugin.Runners
                 if (TestCase.IsScenarioOutline)
                 {
                     var scenarioOutline = gherkinDocument.SpecFlowFeature.ScenarioDefinitions.OfType<ScenarioOutline>().FirstOrDefault(s => s.Name == TestCase.Name);
-                    Examples example = null;
-                    Gherkin.Ast.TableRow exampleRow = null;
-                    if (scenarioOutline != null && SpecFlowParserHelper.GetExampleRowById(scenarioOutline, TestCase.ExampleId, out example, out exampleRow))
+                    if (scenarioOutline != null && SpecFlowParserHelper.GetExampleRowById(scenarioOutline, TestCase.ExampleId, out var example, out var exampleRow))
                     {
                         scenario = SpecFlowParserHelper.CreateScenario(scenarioOutline, example, exampleRow);
                     }
