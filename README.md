@@ -60,12 +60,15 @@ can install the xUnit Visual Studio adapter.
 
 The adapter is currently in BETA and there are some limitations.
 
-1. As Visual Studio Test Explorer window only triggers the re-discovery of tests when the output assembly changes, if you only change the feature files, but nothing else in the code, you need to _Rebuild_ the project in order to see the changes. (This is important only if the change is related to the discovered tests, so for example if you change the scenario name or the examples section of a scenario outline.)
+1. If you use `SpecFlowFeature`: As Visual Studio Test Explorer window only triggers the re-discovery of tests when the output assembly changes, if you only change the feature files, but nothing else in the code, you need to _Rebuild_ the project in order to see the changes. (This is important only if the change is related to the discovered tests, so for example if you change the scenario name or the examples section of a scenario outline.)
 2. The adapter currently does not load the project-level feature file language setting (but assumes `en-US`).
 3. For feature files with `#language` setting, the setting will only be used for data conversions if it is a specific culture (e.g. `de-AT`). For neutral languages (e.g. `de`), currently `en-US` is used for conversions.
-4. The adapter adds all tests into a single test collection, so they cannot be run parallel.
 
+For diagnosing test discovery errors, you can add the following setting to the `App.config` file of the SpecFlow project. With this setting, the test discovery errors are displayed in the `Tests` pane of the output window.
 
+    <appSettings>
+      <add key="xunit.diagnosticMessages" value="true"/>
+    </appSettings>
 
 ## Release History
 
