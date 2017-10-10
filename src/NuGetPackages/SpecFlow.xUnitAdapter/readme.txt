@@ -25,10 +25,21 @@ and removes them from the project.
 2. Make sure the feature files are copied to the target location.
 
 The SpecFlow.xUnitAdapter currently processes feature files in the folder (or 
-subfolders) of the SpecFlow project assembly (typically in bin\Debug). 
+subfolders) of the SpecFlow project assembly (typically in bin\Debug) and when
+they are embedded into the assembly. 
 
-To achieve that, you should change the "Copy to Output Directory" setting of 
-the feature files to "Copy if newer".
+To achieve that, you should change the `Build Action` setting of 
+the feature files to `SpecFlowFeature` if you want them to not be
+embedded, or `SpecFlowEmbeddedFeature` if you want them to be embedded
+in the assembly.
+
+3. Install xUnit Visual Studio adapter
+
+In order to run the tests from the Visual Studio Test Explorer Window, you 
+can install the xUnit Visual Studio adapter. 
+
+    PM> Install-Package xunit.runner.visualstudio
+
 
 Feedback
 --------

@@ -4,7 +4,7 @@ SpecFlow.xUnitAdapter is an xUnit adapter for SpecFlow that allows running
 scenarios without code generation.
 
 Currently supports
-* SpecFlow v2.1
+* SpecFlow v2.2
 * xUnit v2.2 or above
 
 License: Apache (https://github.com/gasparnagy/SpecFlow.xUnitAdapter/blob/master/LICENSE)
