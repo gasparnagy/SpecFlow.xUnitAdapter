@@ -33,7 +33,7 @@ namespace SpecFlow.xUnitAdapter.SpecFlowPlugin.Framework
 
             var featureTestClass = (SpecFlowFeatureTestClass)testClass;
             var gherkinDocument = featureTestClass.GetDocument();
-            if (gherkinDocument.SpecFlowFeature != null)
+            if (gherkinDocument?.SpecFlowFeature != null)
             {
                 featureTestClass.FeatureName = gherkinDocument.SpecFlowFeature.Name;
                 var featureTags = gherkinDocument.SpecFlowFeature.Tags.GetTags().ToArray();

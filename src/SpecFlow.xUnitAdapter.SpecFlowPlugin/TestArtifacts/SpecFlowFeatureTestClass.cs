@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using TechTalk.SpecFlow.Parser;
@@ -63,7 +64,16 @@ namespace SpecFlow.xUnitAdapter.SpecFlowPlugin.TestArtifacts
             data.AddValue("RelativePath", RelativePath);
             data.AddValue("TestCollection", TestCollection);
         }
-        
+
+        protected SpecFlowDocument ParseDocument(string content, string path, SpecFlowGherkinParser parser)
+        {
+            var sourceMap = this.SpecFlowSourceMapper.ReadSourceMap(content);
+
+            this.FeatureFilePath = sourceMap?.SourcePath ?? path;
+
+            return parser.Parse(new StringReader(content), this.FeatureFilePath);
+        }
+
         public abstract SpecFlowDocument GetDocument();
 
         public abstract Task<SpecFlowDocument> GetDocumentAsync();
