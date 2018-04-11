@@ -3,9 +3,15 @@
 SpecFlow.xUnitAdapter is an xUnit adapter for SpecFlow that allows running 
 scenarios without code generation.
 
-Currently supports
+Supports:
+
 * SpecFlow v2.2
 * xUnit v2.2 or above
+
+Requires:
+
+* .NET Framework 4.5 or above
+* Visual Studio for Windows
 
 License: Apache (https://github.com/gasparnagy/SpecFlow.xUnitAdapter/blob/master/LICENSE)
 
