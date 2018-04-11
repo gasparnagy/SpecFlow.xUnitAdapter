@@ -13,12 +13,12 @@
     <projectUrl>https://github.com/gasparnagy/SpecFlow.xUnitAdapter</projectUrl>
     <licenseUrl>https://github.com/gasparnagy/SpecFlow.xUnitAdapter/master/LICENSE</licenseUrl>
     <iconUrl>http://go.specflow.org/specflow-nuget-icon</iconUrl>
-    <copyright>Copyright © 2017 Gaspar Nagy, Spec Solutions</copyright>
+    <copyright>Copyright © 2017-2018 Gaspar Nagy, Spec Solutions</copyright>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <tags>specflow bdd xunit</tags>
     <dependencies>
-      <dependency id="SpecFlow.xUnit" version="2.2.1" />
-      <dependency id="xunit" version="2.2.0" />
+      <dependency id="SpecFlow.xUnit" version="2.3.1" />
+      <dependency id="xunit" version="2.3.0" />
     </dependencies>
   </metadata>
 </package>
