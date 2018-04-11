@@ -72,6 +72,7 @@ namespace SpecFlow.xUnitAdapter.Build
             
             //TODO: If the file modified dates havent changes, consider not copying and appending to the file, and use the existing one.
             File.Copy(inputPath, outputPath, true);
+            File.SetAttributes(outputPath, File.GetAttributes(outputPath) & ~FileAttributes.ReadOnly);
             File.AppendAllLines(outputPath, new[]
             {
                 Environment.NewLine,
