@@ -46,7 +46,12 @@ namespace SpecFlow.xUnitAdapter.SpecFlowPlugin.TestArtifacts
             SpecFlowProject = specFlowProject;
             RelativePath = relativePath;
 
-            TestCollection = new TestCollection(new TestAssembly(specFlowProject, null), null, "Default Collection"); //TODO: support test collections for parallelization
+            InitializeTestCollection();
+        }
+
+        private void InitializeTestCollection()
+        {
+            TestCollection = new TestCollection(new TestAssembly(SpecFlowProject, null), null, "Default Collection"); //TODO: support test collections for parallelization
         }
 
         protected ISpecFlowSourceMapper SpecFlowSourceMapper { get; } = new SpecFlowSourceMapperV1();
@@ -55,14 +60,13 @@ namespace SpecFlow.xUnitAdapter.SpecFlowPlugin.TestArtifacts
         {
             SpecFlowProject = data.GetValue<SpecFlowProjectAssemblyInfo>("SpecFlowProject");
             RelativePath = data.GetValue<string>("RelativePath");
-            TestCollection = data.GetValue<ITestCollection>("TestCollection");
+            InitializeTestCollection();
         }
 
         public virtual void Serialize(IXunitSerializationInfo data)
         {
             data.AddValue("SpecFlowProject", SpecFlowProject);
             data.AddValue("RelativePath", RelativePath);
-            data.AddValue("TestCollection", TestCollection);
         }
 
         protected SpecFlowDocument ParseDocument(string content, string path, SpecFlowGherkinParser parser)
