@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Gherkin.Ast;
 using SpecFlow.xUnitAdapter.SpecFlowPlugin.TestArtifacts;
 using Xunit.Abstractions;
@@ -8,9 +9,16 @@ namespace SpecFlow.xUnitAdapter.SpecFlowPlugin.Framework
 {
     public class SpecFlowTestDiscoverer : XunitTestFrameworkDiscoverer
     {
-        public SpecFlowTestDiscoverer(IAssemblyInfo assemblyInfo, ISourceInformationProvider sourceProvider, IMessageSink diagnosticMessageSink) : 
-            base(new SpecFlowProjectAssemblyInfo(assemblyInfo), sourceProvider, diagnosticMessageSink)
+        public SpecFlowTestDiscoverer(IAssemblyInfo assemblyInfo, ISourceInformationProvider sourceProvider, IMessageSink diagnosticMessageSink, IXunitTestCollectionFactory collectionFactory = null) :
+            base(CreateSpecFlowProjectAssemblyInfo(assemblyInfo), sourceProvider, diagnosticMessageSink)
         {
+        }
+
+        private static SpecFlowProjectAssemblyInfo CreateSpecFlowProjectAssemblyInfo(IAssemblyInfo assemblyInfo)
+        {
+            if (assemblyInfo is IReflectionAssemblyInfo reflectionAssemblyInfo)
+                return new SpecFlowProjectReflectionAssemblyInfo(reflectionAssemblyInfo);
+            return new SpecFlowProjectAssemblyInfo(assemblyInfo);
         }
 
         private bool IsSpecFlowTest(object test)
@@ -21,7 +29,11 @@ namespace SpecFlow.xUnitAdapter.SpecFlowPlugin.Framework
         protected override ITestClass CreateTestClass(ITypeInfo typeInfo)
         {
             if (IsSpecFlowTest(typeInfo))
-                return (ITestClass)typeInfo;
+            {
+                //TODO: return (ITestClass)new SpecFlowTestClass(this.TestCollectionFactory.Get(typeInfo), typeInfo);
+                ((SpecFlowFeatureTestClass)typeInfo).Hack_SetTestCollection(this.TestCollectionFactory.Get(typeInfo));
+                return (ITestClass) typeInfo;
+            }
             return base.CreateTestClass(typeInfo);
         }
 

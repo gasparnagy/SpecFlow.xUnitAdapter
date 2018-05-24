@@ -89,6 +89,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestArtifacts\ScenarioTestCase.cs" />
     <Compile Include="TestArtifacts\SpecFlowProjectAssemblyInfo.cs" />
+    <Compile Include="TestArtifacts\SpecFlowReflectionAssemblyInfo.cs" />
     <Compile Include="TestArtifacts\SpecFlowSourceMap.cs" />
     <Compile Include="TestArtifacts\SpecFlowSourceMapper.cs" />
     <Compile Include="XUnitAdapterPlugin.cs" />
