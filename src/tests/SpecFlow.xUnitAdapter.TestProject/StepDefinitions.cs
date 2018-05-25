@@ -22,6 +22,7 @@ namespace SpecFlow.xUnitAdapter.TestProject
         [Given("I have entered (.*) into the calculator")]
         public void GivenIHaveEnteredSomethingIntoTheCalculator(int number)
         {
+            System.Threading.Thread.Sleep(100);
             var outputHelper = ScenarioContext.ScenarioContainer.Resolve<ITestOutputHelper>();
             outputHelper.WriteLine("Sample output through ITestOutputHelper");
             Console.WriteLine("Running Given step");
