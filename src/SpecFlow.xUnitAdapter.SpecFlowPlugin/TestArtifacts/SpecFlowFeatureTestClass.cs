@@ -1,84 +1,48 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-using TechTalk.SpecFlow.Parser;
+﻿using System;
 using Xunit;
 using Xunit.Abstractions;
-using Xunit.Sdk;
 
 namespace SpecFlow.xUnitAdapter.SpecFlowPlugin.TestArtifacts
 {
-    public abstract class SpecFlowFeatureTestClass : LongLivedMarshalByRefObject, ITypeInfo, IReflectionTypeInfo, ITestClass
+    public class SpecFlowFeatureTestClass : LongLivedMarshalByRefObject, ITestClass
     {
-        public string FeatureName { get; set; }
-        public string RelativePath { get; private set; }
-        public SpecFlowProjectAssemblyInfo SpecFlowProject { get; private set; }
-
-        public virtual string FeatureFilePath { get; protected set; }
-
-        IAssemblyInfo ITypeInfo.Assembly => SpecFlowProject;
-        string ITypeInfo.Name => (FeatureName ?? RelativePath).Replace(".", "");
-        Type IReflectionTypeInfo.Type { get { return typeof(SpecFlowGenericFixtureType); } }
-
-        public ITypeInfo Class => this;
+        public ITypeInfo Class { get; private set; }
         public ITestCollection TestCollection { get; private set; }
 
-        #region ITypeInfo default implementation
-        IEnumerable<IAttributeInfo> ITypeInfo.GetCustomAttributes(string assemblyQualifiedAttributeTypeName) => Enumerable.Empty<IAttributeInfo>();
-        IEnumerable<ITypeInfo> ITypeInfo.GetGenericArguments() => Enumerable.Empty<ITypeInfo>();
-        IMethodInfo ITypeInfo.GetMethod(string methodName, bool includePrivateMethod) => null;
-        IEnumerable<IMethodInfo> ITypeInfo.GetMethods(bool includePrivateMethods) => Enumerable.Empty<IMethodInfo>();
-        ITypeInfo ITypeInfo.BaseType => null;
-        IEnumerable<ITypeInfo> ITypeInfo.Interfaces => Enumerable.Empty<ITypeInfo>();
-        bool ITypeInfo.IsAbstract => false;
-        bool ITypeInfo.IsGenericParameter => false;
-        bool ITypeInfo.IsGenericType => false;
-        bool ITypeInfo.IsSealed => false;
-        bool ITypeInfo.IsValueType => false;
-        #endregion
+        public SpecFlowFeatureTypeInfo FeatureTypeInfo => (SpecFlowFeatureTypeInfo)Class;
 
-        protected SpecFlowFeatureTestClass() { }
-
-        protected SpecFlowFeatureTestClass(SpecFlowProjectAssemblyInfo specFlowProject, string relativePath)
+        [Obsolete("Called by the de-serializer; should only be called by deriving classes for de-serialization purposes")]
+        public SpecFlowFeatureTestClass()
         {
-            SpecFlowProject = specFlowProject;
-            RelativePath = relativePath;
         }
 
-        internal void Hack_SetTestCollection(ITestCollection testCollection)
+        public SpecFlowFeatureTestClass(ITestCollection testCollection, ITypeInfo typeInfo)
         {
+            if (!(typeInfo is SpecFlowFeatureTypeInfo))
+                throw new ArgumentException($"Must me an instance of {nameof(SpecFlowFeatureTypeInfo)}", "typeInfo");
+
             TestCollection = testCollection;
+            Class = typeInfo;
         }
 
-        protected ISpecFlowSourceMapper SpecFlowSourceMapper { get; } = new SpecFlowSourceMapperV1();
-
-        public virtual void Deserialize(IXunitSerializationInfo data)
+        public void Serialize(IXunitSerializationInfo info)
         {
-            SpecFlowProject = data.GetValue<SpecFlowProjectAssemblyInfo>("SpecFlowProject");
-            RelativePath = data.GetValue<string>("RelativePath");
-            TestCollection = data.GetValue<ITestCollection>("TestCollection");
+            info.AddValue("TestCollection", TestCollection);
+            info.AddValue("SpecFlowProject", FeatureTypeInfo.SpecFlowProject);
+            info.AddValue("RelativePath", FeatureTypeInfo.RelativePath);
+            info.AddValue("TypeInfoKind", Class.GetType().Name);
         }
 
-        public virtual void Serialize(IXunitSerializationInfo data)
+        public void Deserialize(IXunitSerializationInfo info)
         {
-            data.AddValue("SpecFlowProject", SpecFlowProject);
-            data.AddValue("RelativePath", RelativePath);
-            data.AddValue("TestCollection", TestCollection);
+            TestCollection = info.GetValue<ITestCollection>("TestCollection");
+            var specFlowProject = info.GetValue<SpecFlowProjectAssemblyInfo>("SpecFlowProject");
+            var relativePath = info.GetValue<string>("RelativePath");
+            var typeInfoKind = info.GetValue<string>("TypeInfoKind");
+            if (typeInfoKind == nameof(FeatureFileTypeInfo))
+                Class = new FeatureFileTypeInfo(specFlowProject, relativePath);
+            else if (typeInfoKind == nameof(EmbeddedFeatureTypeInfo))
+                Class = new EmbeddedFeatureTypeInfo(specFlowProject, relativePath);
         }
-
-        protected SpecFlowDocument ParseDocument(string content, string path, SpecFlowGherkinParser parser)
-        {
-            var sourceMap = this.SpecFlowSourceMapper.ReadSourceMap(content);
-
-            this.FeatureFilePath = sourceMap?.SourcePath ?? path;
-
-            return parser.Parse(new StringReader(content), this.FeatureFilePath);
-        }
-
-        public abstract SpecFlowDocument GetDocument();
-
-        public abstract Task<SpecFlowDocument> GetDocumentAsync();
     }
 }

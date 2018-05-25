@@ -10,7 +10,7 @@ namespace SpecFlow.xUnitAdapter.SpecFlowPlugin.Framework
     public class SpecFlowTestDiscoverer : XunitTestFrameworkDiscoverer
     {
         public SpecFlowTestDiscoverer(IAssemblyInfo assemblyInfo, ISourceInformationProvider sourceProvider, IMessageSink diagnosticMessageSink, IXunitTestCollectionFactory collectionFactory = null) :
-            base(CreateSpecFlowProjectAssemblyInfo(assemblyInfo), sourceProvider, diagnosticMessageSink)
+            base(CreateSpecFlowProjectAssemblyInfo(assemblyInfo), sourceProvider, diagnosticMessageSink, collectionFactory)
         {
         }
 
@@ -21,18 +21,21 @@ namespace SpecFlow.xUnitAdapter.SpecFlowPlugin.Framework
             return new SpecFlowProjectAssemblyInfo(assemblyInfo);
         }
 
-        private bool IsSpecFlowTest(object test)
+        private bool IsSpecFlowTypeInfo(ITypeInfo typeInfo)
         {
-            return test is SpecFlowFeatureTestClass;
+            return typeInfo is SpecFlowFeatureTypeInfo;
+        }
+
+        private bool IsSpecFlowTest(ITestClass testClass)
+        {
+            return testClass is SpecFlowFeatureTestClass;
         }
 
         protected override ITestClass CreateTestClass(ITypeInfo typeInfo)
         {
-            if (IsSpecFlowTest(typeInfo))
+            if (IsSpecFlowTypeInfo(typeInfo))
             {
-                //TODO: return (ITestClass)new SpecFlowTestClass(this.TestCollectionFactory.Get(typeInfo), typeInfo);
-                ((SpecFlowFeatureTestClass)typeInfo).Hack_SetTestCollection(this.TestCollectionFactory.Get(typeInfo));
-                return (ITestClass) typeInfo;
+                return new SpecFlowFeatureTestClass(TestCollectionFactory.Get(typeInfo), typeInfo);
             }
             return base.CreateTestClass(typeInfo);
         }
@@ -43,11 +46,11 @@ namespace SpecFlow.xUnitAdapter.SpecFlowPlugin.Framework
             if (!IsSpecFlowTest(testClass))
                 return base.FindTestsForType(testClass, includeSourceInformation, messageBus, discoveryOptions);
 
-            var featureTestClass = (SpecFlowFeatureTestClass)testClass;
-            var gherkinDocument = featureTestClass.GetDocument();
+            var featureTestClass = ((SpecFlowFeatureTestClass)testClass);
+            var gherkinDocument = featureTestClass.FeatureTypeInfo.GetDocument();
             if (gherkinDocument?.SpecFlowFeature != null)
             {
-                featureTestClass.FeatureName = gherkinDocument.SpecFlowFeature.Name;
+                featureTestClass.FeatureTypeInfo.FeatureName = gherkinDocument.SpecFlowFeature.Name;
                 var featureTags = gherkinDocument.SpecFlowFeature.Tags.GetTags().ToArray();
                 foreach (var scenarioDefinition in gherkinDocument.SpecFlowFeature.ScenarioDefinitions.Where(sd => !(sd is Background)))
                 {

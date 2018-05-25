@@ -5,13 +5,13 @@ using TechTalk.SpecFlow.Parser;
 
 namespace SpecFlow.xUnitAdapter.SpecFlowPlugin.TestArtifacts
 {
-    public class FeatureFileTestClass : SpecFlowFeatureTestClass
+    public class FeatureFileTypeInfo : SpecFlowFeatureTypeInfo
     {
-        public FeatureFileTestClass()
+        public FeatureFileTypeInfo()
         {
         }
 
-        public FeatureFileTestClass(SpecFlowProjectAssemblyInfo specFlowProject, string relativePath)
+        public FeatureFileTypeInfo(SpecFlowProjectAssemblyInfo specFlowProject, string relativePath)
             : base(specFlowProject, relativePath)
         {
         }

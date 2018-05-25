@@ -14,11 +14,12 @@ namespace SpecFlow.xUnitAdapter.SpecFlowPlugin.TestArtifacts
 {
     public class ScenarioTestCase : LongLivedMarshalByRefObject, ITestMethod, IXunitTestCase, IReflectionMethodInfo
     {
-        public SpecFlowFeatureTestClass FeatureFile { get; private set; }
+        public SpecFlowFeatureTestClass FeatureTestClass { get; private set; }
+        public SpecFlowFeatureTypeInfo FeatureTypeInfo => FeatureTestClass.FeatureTypeInfo;
         public string Name { get; private set; }
 
         public string DisplayName => GetDisplayName();
-        public string UniqueID => $"{FeatureFile.RelativePath};{Name};{ExampleId}";
+        public string UniqueID => $"{FeatureTypeInfo.RelativePath};{Name};{ExampleId}";
 
         public ISourceInformation SourceInformation { get; set; }
         public string SkipReason { get; set; }
@@ -29,7 +30,7 @@ namespace SpecFlow.xUnitAdapter.SpecFlowPlugin.TestArtifacts
         public bool IsScenarioOutline => !string.IsNullOrEmpty(ExampleId);
 
         object[] ITestCase.TestMethodArguments => ScenarioOutlineParameters?.Cast<object>().ToArray();
-        public ITestClass TestClass => FeatureFile;
+        public ITestClass TestClass => FeatureTestClass;
         public ITestMethod TestMethod => this;
         public IMethodInfo Method => this;
 
@@ -40,9 +41,9 @@ namespace SpecFlow.xUnitAdapter.SpecFlowPlugin.TestArtifacts
 
         private ScenarioTestCase(SpecFlowFeatureTestClass featureTestClass, ScenarioDefinition scenario, string[] featureTags, Location location)
         {
-            FeatureFile = featureTestClass;
+            FeatureTestClass = featureTestClass;
             Name = scenario.Name;
-            SourceInformation = new SourceInformation { FileName = featureTestClass.FeatureFilePath, LineNumber = location?.Line };
+            SourceInformation = new SourceInformation { FileName = FeatureTypeInfo.FeatureFilePath, LineNumber = location?.Line };
             Traits = new Dictionary<string, List<string>>();
             Traits.Add("Category", featureTags.Concat(((IHasTags)scenario).Tags.GetTags()).ToList());
         }
@@ -70,14 +71,14 @@ namespace SpecFlow.xUnitAdapter.SpecFlowPlugin.TestArtifacts
 
         public void Deserialize(IXunitSerializationInfo data)
         {
-            FeatureFile = data.GetValue<SpecFlowFeatureTestClass>("FeatureFile");
+            FeatureTestClass = data.GetValue<SpecFlowFeatureTestClass>("FeatureTestClass");
             Name = data.GetValue<string>("Name");
             ExampleId = data.GetValue<string>("ExampleId");
         }
 
         public void Serialize(IXunitSerializationInfo data)
         {
-            data.AddValue("FeatureFile", FeatureFile);
+            data.AddValue("FeatureTestClass", FeatureTestClass);
             data.AddValue("Name", Name);
             data.AddValue("ExampleId", ExampleId);
         }

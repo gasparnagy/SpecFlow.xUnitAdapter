@@ -30,7 +30,7 @@ namespace SpecFlow.xUnitAdapter.SpecFlowPlugin.Runners
             Debug.Assert(gherkinDocument.Feature != null);
             var feature = gherkinDocument.Feature;
 
-            var assembly = Assembly.LoadFrom(TestCase.FeatureFile.SpecFlowProject.AssemblyPath);
+            var assembly = Assembly.LoadFrom(TestCase.FeatureTypeInfo.SpecFlowProject.AssemblyPath);
             testRunner = TestRunnerManager.GetTestRunner(assembly);
             var featureInfo = new FeatureInfo(GetFeatureCulture(feature.Language), feature.Name, feature.Description, ProgrammingLanguage.CSharp, feature.Tags.GetTags().ToArray());
             testRunner.OnFeatureStart(featureInfo);
@@ -79,7 +79,7 @@ namespace SpecFlow.xUnitAdapter.SpecFlowPlugin.Runners
             var summary = new RunSummary() { Total = 1 };
             string output = "";
 
-            var gherkinDocument = await this.TestCase.FeatureFile.GetDocumentAsync();
+            var gherkinDocument = await this.TestCase.FeatureTypeInfo.GetDocumentAsync();
 
 
             Scenario scenario = null;

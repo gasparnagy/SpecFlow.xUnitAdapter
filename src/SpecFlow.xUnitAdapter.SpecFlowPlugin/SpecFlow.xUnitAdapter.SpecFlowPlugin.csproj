@@ -79,8 +79,9 @@
   <ItemGroup>
     <Compile Include="Runners\XUnitTraceListener.cs" />
     <Compile Include="TestArtifacts\SpecFlowFeatureTestClass.cs" />
-    <Compile Include="TestArtifacts\EmbeddedFeatureFileTestClass.cs" />
-    <Compile Include="TestArtifacts\FeatureFileTestClass.cs" />
+    <Compile Include="TestArtifacts\SpecFlowFeatureTypeInfo.cs" />
+    <Compile Include="TestArtifacts\EmbeddedFeatureTypeInfo.cs" />
+    <Compile Include="TestArtifacts\FeatureFileTypeInfo.cs" />
     <Compile Include="Runners\ScenarioTestCaseRunner.cs" />
     <Compile Include="TestArtifacts\SpecFlowGenericFixtureType.cs" />
     <Compile Include="SpecFlowParserHelper.cs" />

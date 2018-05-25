@@ -43,7 +43,7 @@ namespace SpecFlow.xUnitAdapter.SpecFlowPlugin.TestArtifacts
             foreach (var resourceName in assembly.GetManifestResourceNames().Where(x => x.EndsWith(".feature")))
             {
                 Console.WriteLine($"      {resourceName}");
-                yield return new EmbeddedFeatureFileTestClass(this, resourceName);
+                yield return new EmbeddedFeatureTypeInfo(this, resourceName);
             }
 
             Console.WriteLine($"    Discovering feature files from folder {FeatureFilesFolder}");
@@ -51,7 +51,7 @@ namespace SpecFlow.xUnitAdapter.SpecFlowPlugin.TestArtifacts
             {
                 var relativePath = featureFilePath.Substring(FeatureFilesFolder.Length).TrimStart(Path.DirectorySeparatorChar);
                 Console.WriteLine($"      {relativePath}");
-                yield return new FeatureFileTestClass(this, relativePath);
+                yield return new FeatureFileTypeInfo(this, relativePath);
             }
 
             // discovering "standard" xunit tests to allow incremental transition from the generated style to the new style
